@@ -1,10 +1,121 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>Мой сайт</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vantality | Luau API & Marketplace</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide Icons для соответствия стилю скрипта -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-    <h1>Привет! Это сайт Vantality</h1>
-    <p>Создано с помощью GitHub Pages.</p>
+
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">VANTALITY <span class="version">v1.7</span></div>
+            <nav class="nav">
+                <a href="#marketplace" class="nav-link">Marketplace</a>
+                <a href="#api" class="nav-link">Luau API</a>
+                <a href="#rules" class="nav-link">Rules</a>
+                <a href="https://t.me/ahk_gbs" target="_blank" class="nav-btn">Community</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1 class="glitch-text">NEXT GENERATION</h1>
+            <p>Продвинутый Luau API и глобальный маркетплейс скриптов для The Strongest Battlegrounds.</p>
+        </section>
+
+        <!-- Marketplace Section -->
+        <section id="marketplace" class="section-box">
+            <div class="section-header">
+                <i data-lucide="shopping-bag"></i>
+                <h2>Marketplace</h2>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>Облачная синхронизация</h3>
+                    <p>Загружайте конфиги и скрипты прямо в игре. Все изменения сохраняются в облаке и доступны мгновенно.</p>
+                </div>
+                <div class="card">
+                    <h3>Статус-система</h3>
+                    <p>Отслеживайте работоспособность: <span class="status working">Working</span>, <span class="status updating">Updating</span> или <span class="status patched">Patched</span>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- API Documentation -->
+        <section id="api" class="section-box">
+            <div class="section-header">
+                <i data-lucide="code"></i>
+                <h2>Luau API Documentation</h2>
+            </div>
+            
+            <div class="api-content">
+                <p class="desc">Наш API позволяет создавать кастомные модули с нативным интерфейсом Vantality.</p>
+                
+                <div class="method-card">
+                    <div class="method-title">Vantality.CreateSection(name)</div>
+                    <p>Создает новую визуальную секцию в окне чита.</p>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">example.lua</div>
+                    <pre><code>-- Пример создания простого тоггла
+local UI = Vantality.CreateSection("My Script")
+
+UI:AddToggle({
+    Name = "Auto Farm",
+    Default = false,
+    Callback = function(state)
+        print("Farm state: ", state)
+    end
+})</code></pre>
+                </div>
+
+                <div class="api-grid">
+                    <div class="api-item">
+                        <h4>AddSlider</h4>
+                        <p>Добавляет ползунок (Integer/Float).</p>
+                    </div>
+                    <div class="api-item">
+                        <h4>AddDropdown</h4>
+                        <p>Выпадающий список (Single/Multi).</p>
+                    </div>
+                    <div class="api-item">
+                        <h4>AddColorPicker</h4>
+                        <p>Выбор цвета с прозрачностью.</p>
+                    </div>
+                    <div class="api-item">
+                        <h4>Vantality.Bind</h4>
+                        <p>Безопасное подключение к событиям (RunService).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rules -->
+        <section id="rules" class="section-box">
+            <div class="section-header">
+                <i data-lucide="shield-alert"></i>
+                <h2>Rules & Requirements</h2>
+            </div>
+            <ul class="rules-list">
+                <li><span>1.</span> Запрещено публиковать вредоносный код (Logger/Stealer).</li>
+                <li><span>2.</span> Скрипт должен иметь описание и актуальную версию.</li>
+                <li><span>3.</span> Обязательно используйте <code>OnUnload</code> для очистки соединений.</li>
+                <li><span>4.</span> Плагиат чужих работ без указания авторства ведет к бану в маркете.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Vantality Software. Developed by <span>grab1s</span>. UI Base by <span>4lpaca</span>.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
