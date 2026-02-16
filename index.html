@@ -27,7 +27,7 @@
     <section class="hero-section">
         <div class="hero-content">
             <h1 class="glow-text">LUAU SCRIPTING API</h1>
-            <p>Создавайте кастомные модули с нативным интерфейсом и глубокой интеграцией в ядро Vantality.</p>
+            <p>Подробная документация по созданию кастомных скриптов для экосистемы Vantality.</p>
         </div>
     </section>
 
@@ -38,23 +38,23 @@
                 <i data-lucide="shopping-cart"></i>
                 <h2>Marketplace System</h2>
             </div>
-            <p class="section-desc">Глобальная база данных <code>database.json</code> позволяет вашим наработкам мгновенно появляться в меню пользователей.</p>
+            <p class="section-desc">Ваши скрипты и конфиги попадают в общую базу данных. Маркетплейс автоматически управляет версиями, позволяя пользователям скачивать, обновлять и удалять ваши работы в один клик.</p>
             
             <div class="market-grid">
                 <div class="m-card">
                     <div class="m-icon"><i data-lucide="file-code"></i></div>
                     <h3>Scripts</h3>
-                    <p>Пользовательские модули. Поддерживают авто-загрузку и сохранение настроек.</p>
+                    <p>Пользовательские Luau модули. Загружаются в песочнице с доступом к <code>Vantality</code> API.</p>
                 </div>
                 <div class="m-card">
                     <div class="m-icon"><i data-lucide="settings"></i></div>
                     <h3>Main Configs</h3>
-                    <p>Пресеты для основного функционала (FOV, World, Player).</p>
+                    <p>JSON-пресеты для настроек основного меню (FOV, World, Player).</p>
                 </div>
                 <div class="m-card">
                     <div class="m-icon"><i data-lucide="layout"></i></div>
                     <h3>Script Configs</h3>
-                    <p>JSON-файлы с настройками конкретно под ваши API-скрипты.</p>
+                    <p>Настройки для API-скриптов. Сохраняются автоматически при изменении значений в UI.</p>
                 </div>
             </div>
         </section>
@@ -66,9 +66,14 @@
                 <h2>Documentation</h2>
             </div>
 
-            <!-- Initialization -->
+            <!-- Intro -->
             <div class="api-sub-section">
-                <h3>Инициализация</h3>
+                <h3>Введение и Конфигурация</h3>
+                <p>Все скрипты выполняются в изолированном окружении. API автоматически загружает и сохраняет значения элементов. </p>
+                <ul class="text-list">
+                    <li><strong>Ключ сохранения:</strong> API ищет параметр <code>Flag</code>. Если он отсутствует, используется <code>Name</code>.</li>
+                    <li><strong>Nested Menus:</strong> Большинство элементов поддерживают вложенные меню через кнопку шестерёнки.</li>
+                </ul>
                 <div class="method-box">
                     <div class="method-header">
                         <span class="method-name">Vantality.CreateSection</span>
@@ -76,103 +81,196 @@
                         <span class="method-return">returns: SectionProxy</span>
                     </div>
                     <div class="method-body">
-                        <p>Создает секцию в одной из свободных колонок (Center/Right). API автоматически балансирует количество элементов между колонками для эстетичного вида.</p>
+                        <p>Инициализирует новую секцию. API само выберет оптимальную колонку для отрисовки.</p>
                         <div class="code-window">
-                            <pre><code>local UI = Vantality.CreateSection("Combat Module")</code></pre>
+                            <pre><code>local UI = Vantality.CreateSection("General Settings")</code></pre>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- UI ELEMENTS -->
+            <!-- UI ELEMENTS DETAILED -->
             <div class="api-sub-section">
-                <h3>Элементы интерфейса</h3>
-                <p class="text-dim">Каждый элемент (кроме кнопок) автоматически регистрируется в системе конфигов. Ключом для сохранения является <code>Flag</code>, а если он не указан — <code>Name</code>.</p>
-
+                <h3>Создание элементов (UI Methods)</h3>
+                
                 <div class="element-table">
                     <!-- Toggle -->
                     <div class="el-row">
                         <div class="el-info">
                             <h4>AddToggle</h4>
-                            <p>Создает выключатель. <br>Аргумент <code>Risky</code> окрашивает текст в оранжевый.</p>
+                            <p>Стандартный переключатель. <br><code>Risky:</code> оранжевый текст. <br><code>Option:</code> включает вложенное меню.</p>
                         </div>
                         <div class="el-code">
                             <pre><code>UI:AddToggle({ 
-    Name = "Auto Block", 
+    Name = "God Mode", 
     Default = false, 
-    Option = true, -- Добавляет кнопку шестеренки
-    Callback = function(v) print(v) end 
+    Risky = true,
+    Option = true,
+    Callback = function(state) end 
 })</code></pre>
                         </div>
                     </div>
 
-                    <!-- Slider -->
+                    <!-- Integer Slider -->
                     <div class="el-row">
                         <div class="el-info">
-                            <h4>AddSlider</h4>
-                            <p>Ползунок для чисел. <br><code>Precise</code> — кол-во знаков после запятой.</p>
+                            <h4>AddSlider (Integer)</h4>
+                            <p>Слайдер для целых чисел. Используйте <code>Step</code> для шага и <code>Type</code> для суффикса (%, s, studs).</p>
                         </div>
                         <div class="el-code">
                             <pre><code>UI:AddSlider({ 
-    Name = "Power", 
-    Range = {1, 100}, 
-    Precise = 0, 
+    Name = "WalkSpeed", 
+    Range = {16, 200}, 
+    Default = 16, 
     Step = 1,
+    Type = " studs",
     Callback = function(v) end 
 })</code></pre>
                         </div>
                     </div>
 
-                    <!-- Dropdown -->
+                    <!-- Precise Slider -->
+                    <div class="el-row">
+                        <div class="el-info">
+                            <h4>AddSlider (Precise)</h4>
+                            <p>Для дробных значений (Float). <br><code>Precise:</code> кол-во знаков после запятой.</p>
+                        </div>
+                        <div class="el-code">
+                            <pre><code>UI:AddSlider({ 
+    Name = "Jump Height", 
+    Range = {0, 1}, 
+    Default = 0.5, 
+    Precise = 2,
+    Callback = function(v) end 
+})</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown Single -->
                     <div class="el-row">
                         <div class="el-info">
                             <h4>AddDropdown</h4>
-                            <p>Список. В режиме <code>Multi</code> возвращает таблицу ключей со значениями true/false.</p>
+                            <p>Одиночный выбор строки из списка <code>Values</code>. Возвращает строку.</p>
                         </div>
                         <div class="el-code">
                             <pre><code>UI:AddDropdown({ 
-    Name = "Select Hero", 
-    Values = {"Saitama", "Garou", "Genos"}, 
-    Multi = false,
+    Name = "Target Bone", 
+    Values = {"Head", "Torso", "Random"}, 
+    Default = "Head",
     Callback = function(v) end 
+})</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown Multi -->
+                    <div class="el-row">
+                        <div class="el-info">
+                            <h4>AddDropdown (Multi)</h4>
+                            <p>Множественный выбор. <br><strong>Callback:</strong> возвращает таблицу <code>{ [Name] = bool }</code>.</p>
+                        </div>
+                        <div class="el-code">
+                            <pre><code>UI:AddDropdown({ 
+    Name = "Filters", 
+    Values = {"Players", "NPCs"}, 
+    Default = {["Players"] = true},
+    Multi = true,
+    Callback = function(tbl) end 
+})</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Color Picker -->
+                    <div class="el-row">
+                        <div class="el-info">
+                            <h4>AddColorPicker</h4>
+                            <p>Выбор цвета. <br><code>Transparency:</code> поддержка альфа-канала (0-1).</p>
+                        </div>
+                        <div class="el-code">
+                            <pre><code>UI:AddColorPicker({ 
+    Name = "ESP Color", 
+    Default = Color3.fromRGB(255, 0, 0),
+    Transparency = 0.5,
+    Callback = function(color, alpha) end 
+})</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Keybind -->
+                    <div class="el-row">
+                        <div class="el-info">
+                            <h4>AddKeybind</h4>
+                            <p>Привязка клавиши. Поддерживает Enum и ввод от пользователя.</p>
+                        </div>
+                        <div class="el-code">
+                            <pre><code>UI:AddKeybind({ 
+    Name = "Flight Key", 
+    Default = Enum.KeyCode.F,
+    Callback = function(key) end 
+})</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Button -->
+                    <div class="el-row">
+                        <div class="el-info">
+                            <h4>AddButton</h4>
+                            <p>Простое действие без сохранения состояния.</p>
+                        </div>
+                        <div class="el-code">
+                            <pre><code>UI:AddButton({ 
+    Name = "Reset All", 
+    Callback = function() end 
 })</code></pre>
                         </div>
                     </div>
                 </div>
 
-                <!-- SUB-MENUS (.Option) -->
+                <!-- SUB-MENUS EXPLAINED -->
                 <div class="special-note">
-                    <div class="note-title"><i data-lucide="info"></i> Вложенные меню (Proxy Objects)</div>
-                    <p>Методы <code>AddToggle</code>, <code>AddSlider</code>, <code>AddDropdown</code> и <code>AddColorPicker</code> возвращают объект, содержащий поле <code>.Option</code>. Это позволяет добавлять элементы внутрь выпадающего меню этого элемента (кнопка шестеренки).</p>
+                    <div class="note-title"><i data-lucide="layers"></i> Прокси-объекты и Nested Option</div>
+                    <p>При создании элемента с параметром <code>Option = true</code>, вызов метода возвращает объект, содержащий свойство <code>.Option</code>. Это полнофункциональный контейнер <code>Elements</code>.</p>
                     <div class="code-window">
-                        <pre><code>local main = UI:AddToggle({Name = "Master", Option = true})
-main.Option:AddSlider({Name = "Sub Settings", Range = {0, 10}})</code></pre>
+                        <pre><code>local master = UI:AddToggle({ Name = "Main Switch", Option = true })
+-- Добавляем кнопку ВНУТРЬ тоггла (появится при клике на шестеренку)
+master.Option:AddButton({ Name = "Internal Action", Callback = function() end })</code></pre>
                     </div>
                 </div>
             </div>
 
             <!-- SYSTEM UTILS -->
             <div class="api-sub-section">
-                <h3>Системные методы</h3>
+                <h3>Служебные функции и События</h3>
                 
                 <div class="method-box">
                     <div class="method-header">
                         <span class="method-name">Vantality.Bind</span>
-                        <span class="method-params">(signal, callback)</span>
+                        <span class="method-params">(signal: RBXScriptSignal, callback: function)</span>
                     </div>
                     <div class="method-body">
-                        <p>Безопасное подключение к сигналам (RenderStepped, Heartbeat). <strong>Обязательно к использованию:</strong> все бинды, созданные через этот метод, автоматически отключаются при выгрузке скрипта.</p>
+                        <p><strong>Важно:</strong> Никогда не делайте <code>.Connect</code> напрямую к сигналам игры. Используйте <code>Vantality.Bind</code> — это гарантирует, что соединение будет разорвано автоматически, когда скрипт выгрузится.</p>
+                        <div class="code-window">
+                            <pre><code>Vantality.Bind(game:GetService("RunService").RenderStepped, function(dt)
+    -- Ваш цикл тут
+end)</code></pre>
+                        </div>
                     </div>
                 </div>
 
                 <div class="method-box">
                     <div class="method-header">
                         <span class="method-name">Vantality.Notify</span>
-                        <span class="method-params">(config)</span>
+                        <span class="method-params">(config: table)</span>
                     </div>
                     <div class="method-body">
-                        <p>Выводит красивое уведомление в углу экрана. Поддерживает иконки из Lucide.</p>
-                        <pre><code>Vantality.Notify({ Title = "Core", Content = "Loaded!", Icon = "shield", Duration = 3 })</code></pre>
+                        <p>Вызов нативного уведомления. Список доступных иконок соответствует библиотеке <strong>Lucide</strong>.</p>
+                        <div class="code-window">
+                            <pre><code>Vantality.Notify({ 
+    Title = "Success", 
+    Content = "Settings Applied!", 
+    Icon = "check-circle", 
+    Duration = 5 
+})</code></pre>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -182,15 +280,18 @@ main.Option:AddSlider({Name = "Sub Settings", Range = {0, 10}})</code></pre>
         <section id="cleanup" class="content-block">
             <div class="block-title">
                 <i data-lucide="refresh-ccw"></i>
-                <h2>Выгрузка скрипта (Cleanup)</h2>
+                <h2>Жизненный цикл и OnUnload</h2>
             </div>
-            <p>Для предотвращения утечек памяти и артефактов в игре, всегда определяйте функцию <code>OnUnload</code>. Она вызывается ядром API в момент остановки вашего скрипта.</p>
+            <p>Когда пользователь нажимает "Unload" или удаляет ваш скрипт из списка, Vantality вызывает глобальную функцию <code>OnUnload</code>, если она определена. Это ваш шанс вернуть игру в исходное состояние.</p>
             <div class="code-window ide">
-                <div class="ide-header">example_cleanup.lua</div>
-                <pre><code>function OnUnload()
-    -- Возвращаем настройки игры в дефолт
-    game.Lighting.Brightness = 2
-    Vantality.Notify({ Title = "Vantality", Content = "Script Cleanup Done" })
+                <div class="ide-header">cleanup_logic.lua</div>
+                <pre><code>-- Сохраняем оригинальные параметры
+local oldFog = game.Lighting.FogEnd
+
+function OnUnload()
+    -- Обязательно возвращаем всё как было!
+    game.Lighting.FogEnd = oldFog
+    print("Script Resources Cleared")
 end</code></pre>
             </div>
         </section>
@@ -199,35 +300,50 @@ end</code></pre>
         <section id="full-example" class="content-block">
             <div class="block-title">
                 <i data-lucide="file-check"></i>
-                <h2>Полный пример</h2>
+                <h2>Итоговый пример (Complete Script)</h2>
             </div>
+            <p class="section-desc">Демонстрация всех основных возможностей API в одном файле.</p>
             <div class="code-window ide large">
-                <div class="ide-header">advanced_script.lua</div>
-                <pre><code>local UI = Vantality.CreateSection("Advanced API")
+                <div class="ide-header">example_api.lua</div>
+                <pre><code>local UI = Vantality.CreateSection("API Showcase")
 
-local KillAll = UI:AddToggle({
-    Name = "Kill All Players",
-    Risky = true,
-    Callback = function(state)
-        _G.Loop = state
-    end
+-- Создаем мастер-тоггл с настройками
+local Fly = UI:AddToggle({
+    Name = "Flight Module",
+    Option = true,
+    Callback = function(v) _G.Flying = v end
 })
 
-KillAll.Option:AddSlider({
-    Name = "Kill Distance",
-    Range = {10, 500},
-    Default = 100,
-    Type = " studs"
+-- Вкладываем настройки скорости внутрь модуля полета
+Fly.Option:AddSlider({
+    Name = "Fly Speed",
+    Range = {1, 10},
+    Default = 5,
+    Precise = 1,
+    Flag = "FlySpeedValue"
 })
 
+-- Выбор визуального эффекта
+UI:AddDropdown({
+    Name = "VFX Style",
+    Values = {"Electric", "Fire", "None"},
+    Callback = function(v) print("Selected Style: " .. v) end
+})
+
+-- Безопасный цикл
 Vantality.Bind(game:GetService("RunService").Heartbeat, function()
-    if _G.Loop then
-        -- логика тут
+    if _G.Flying then
+        -- Логика перемещения
     end
 end)
 
+-- Уведомление при старте
+Vantality.Notify({ Title = "Vantality", Content = "Showcase Script Ready", Icon = "loader" })
+
+-- Корректное завершение
 function OnUnload()
-    _G.Loop = false
+    _G.Flying = false
+    Vantality.Notify({ Title = "Vantality", Content = "Script Unloaded", Icon = "trash" })
 end</code></pre>
             </div>
         </section>
@@ -235,10 +351,10 @@ end</code></pre>
 
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; 2026 VANTALITY. Developed with passion by <span class="pink">grab1s</span>.</p>
+            <p>&copy; 2026 VANTALITY. Developed by <span class="pink">grab1s</span>.</p>
             <div class="footer-links">
-                <span>UI Base: 4lpaca</span>
-                <span>The Strongest Battlegrounds Only</span>
+                <span>UI Library: Fatality Engine Mod</span>
+                <span>Luau API v1.7</span>
             </div>
         </div>
     </footer>
