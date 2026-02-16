@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vantality | Developer Portal</title>
+    <title>Vantality | Luau API & Marketplace</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -11,156 +11,235 @@
 
     <header class="header">
         <div class="header-inner">
-            <div class="logo-group">
-                <span class="logo">VANTALITY</span>
-                <span class="badge">API v1.7</span>
+            <div class="logo-wrap">
+                <span class="logo-main">VANTALITY</span>
+                <span class="logo-sub">DEVELOPER</span>
             </div>
-            <nav class="nav">
-                <a href="#marketplace">Marketplace</a>
-                <a href="#docs">Documentation</a>
-                <a href="#rules">Rules</a>
-                <a href="https://t.me/ahk_gbs" class="nav-btn">Telegram</a>
+            <nav class="top-nav">
+                <a href="#market">Marketplace</a>
+                <a href="#api">Luau API</a>
+                <a href="#cleanup">OnUnload</a>
+                <a href="https://t.me/ahk_gbs" class="btn-primary">Telegram</a>
             </nav>
         </div>
     </header>
 
-    <div class="main-wrapper">
-        <!-- Левый сайдбар для быстрой навигации по докам -->
-        <aside class="sidebar">
-            <div class="sidebar-section">
-                <h4>Навигация</h4>
-                <a href="#marketplace">Marketplace</a>
-                <a href="#docs-start">Начало работы</a>
-                <a href="#docs-ui">Интерфейс (UI)</a>
-                <a href="#docs-utils">Утилиты и События</a>
-                <a href="#docs-cleanup">Выгрузка (Cleanup)</a>
-                <a href="#docs-example">Полный пример</a>
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="glow-text">LUAU SCRIPTING API</h1>
+            <p>Создавайте кастомные модули с нативным интерфейсом и глубокой интеграцией в ядро Vantality.</p>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <!-- MARKETPLACE -->
+        <section id="market" class="content-block">
+            <div class="block-title">
+                <i data-lucide="shopping-cart"></i>
+                <h2>Marketplace System</h2>
             </div>
-        </aside>
-
-        <main class="content">
-            <!-- Hero -->
-            <section class="hero-full">
-                <h1 class="glitch">VANTALITY DEVELOPER HUB</h1>
-                <p>Создавайте профессиональные модули для The Strongest Battlegrounds с использованием нативного API и делитесь ими в глобальном магазине.</p>
-            </section>
-
-            <!-- Marketplace Info -->
-            <section id="marketplace" class="doc-block">
-                <div class="block-header"><i data-lucide="shopping-bag"></i> Marketplace Ecosystem</div>
-                <p>Маркетплейс Vantality — это встроенная система дистрибуции. Ваши скрипты попадают в <code>database.json</code> и становятся доступны всем пользователям в реальном времени.</p>
-                
-                <div class="grid-3">
-                    <div class="stat-card">
-                        <span class="label">SCRIPTS</span>
-                        <p>Полноценные Luau модули (.lua / .luau)</p>
-                    </div>
-                    <div class="stat-card">
-                        <span class="label">CONFIGS</span>
-                        <p>Готовые пресеты для основного меню</p>
-                    </div>
-                    <div class="stat-card">
-                        <span class="label">SCRIPT CFGS</span>
-                        <p>Конфиги для пользовательских API скриптов</p>
-                    </div>
+            <p class="section-desc">Глобальная база данных <code>database.json</code> позволяет вашим наработкам мгновенно появляться в меню пользователей.</p>
+            
+            <div class="market-grid">
+                <div class="m-card">
+                    <div class="m-icon"><i data-lucide="file-code"></i></div>
+                    <h3>Scripts</h3>
+                    <p>Пользовательские модули. Поддерживают авто-загрузку и сохранение настроек.</p>
                 </div>
-            </section>
-
-            <!-- API Start -->
-            <section id="docs" class="doc-block">
-                <h2 id="docs-start">1. Начало работы</h2>
-                <p>Все скрипты выполняются в изолированной песочнице (Sandbox). Вам доступен глобальный объект <code>Vantality</code> и стандартные библиотеки Roblox (task, spawn, math и др.).</p>
-                <div class="info-note">
-                    <strong>Технический нюанс:</strong> API автоматически сохраняет значения элементов по их <code>Flag</code> или <code>Name</code> в папку <code>configs</code>.
+                <div class="m-card">
+                    <div class="m-icon"><i data-lucide="settings"></i></div>
+                    <h3>Main Configs</h3>
+                    <p>Пресеты для основного функционала (FOV, World, Player).</p>
                 </div>
-            </section>
+                <div class="m-card">
+                    <div class="m-icon"><i data-lucide="layout"></i></div>
+                    <h3>Script Configs</h3>
+                    <p>JSON-файлы с настройками конкретно под ваши API-скрипты.</p>
+                </div>
+            </div>
+        </section>
 
-            <!-- API UI -->
-            <section id="docs-ui" class="doc-block">
-                <h2>2. Методы Интерфейса (UI)</h2>
-                
-                <!-- CreateSection -->
-                <div class="api-method">
+        <!-- CORE API -->
+        <section id="api" class="content-block">
+            <div class="block-title">
+                <i data-lucide="terminal"></i>
+                <h2>Documentation</h2>
+            </div>
+
+            <!-- Initialization -->
+            <div class="api-sub-section">
+                <h3>Инициализация</h3>
+                <div class="method-box">
                     <div class="method-header">
-                        <span class="m-name">Vantality.CreateSection</span>
-                        <span class="m-args">(title: string)</span>
-                        <span class="m-ret">returns: SectionObject</span>
+                        <span class="method-name">Vantality.CreateSection</span>
+                        <span class="method-params">(title: string)</span>
+                        <span class="method-return">returns: SectionProxy</span>
                     </div>
-                    <p>Создает новую визуальную группу элементов в правой части интерфейса.</p>
-                </div>
-
-                <!-- Elements -->
-                <div class="elements-list">
-                    <h3>Объекты элементов (Add...)</h3>
-                    
-                    <div class="element-item">
-                        <h4>AddToggle(config)</h4>
-                        <pre><code>UI:AddToggle({ Name = "Double Jump", Default = false, Risky = false, Option = true, Callback = function(v) end })</code></pre>
-                        <p>Флаг <code>Option = true</code> добавляет кнопку настроек (шестеренку). Доступ к вложенному меню через <code>.Option</code>.</p>
-                    </div>
-
-                    <div class="element-item">
-                        <h4>AddSlider(config)</h4>
-                        <pre><code>UI:AddSlider({ Name = "Speed", Range = {16, 100}, Default = 16, Precise = 1, Step = 0.5, Type = "studs", Callback = function(v) end })</code></pre>
-                        <p><code>Precise</code> определяет количество знаков после запятой. <code>Type</code> — суффикс значения.</p>
-                    </div>
-
-                    <div class="element-item">
-                        <h4>AddDropdown(config)</h4>
-                        <pre><code>UI:AddDropdown({ Name = "Mode", Values = {"Legit", "Rage"}, Multi = false, Callback = function(v) end })</code></pre>
-                        <p>Если <code>Multi = true</code>, Callback вернет таблицу <code>{ ["Value"] = true/false }</code>.</p>
-                    </div>
-
-                    <div class="element-item">
-                        <h4>AddColorPicker(config)</h4>
-                        <pre><code>UI:AddColorPicker({ Name = "ESP Color", Default = Color3.new(1,0,0), Transparency = 0, Callback = function(clr, alpha) end })</code></pre>
+                    <div class="method-body">
+                        <p>Создает секцию в одной из свободных колонок (Center/Right). API автоматически балансирует количество элементов между колонками для эстетичного вида.</p>
+                        <div class="code-window">
+                            <pre><code>local UI = Vantality.CreateSection("Combat Module")</code></pre>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <!-- Utils -->
-            <section id="docs-utils" class="doc-block">
-                <h2 id="docs-utils">3. Системные функции</h2>
+            <!-- UI ELEMENTS -->
+            <div class="api-sub-section">
+                <h3>Элементы интерфейса</h3>
+                <p class="text-dim">Каждый элемент (кроме кнопок) автоматически регистрируется в системе конфигов. Ключом для сохранения является <code>Flag</code>, а если он не указан — <code>Name</code>.</p>
+
+                <div class="element-table">
+                    <!-- Toggle -->
+                    <div class="el-row">
+                        <div class="el-info">
+                            <h4>AddToggle</h4>
+                            <p>Создает выключатель. <br>Аргумент <code>Risky</code> окрашивает текст в оранжевый.</p>
+                        </div>
+                        <div class="el-code">
+                            <pre><code>UI:AddToggle({ 
+    Name = "Auto Block", 
+    Default = false, 
+    Option = true, -- Добавляет кнопку шестеренки
+    Callback = function(v) print(v) end 
+})</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Slider -->
+                    <div class="el-row">
+                        <div class="el-info">
+                            <h4>AddSlider</h4>
+                            <p>Ползунок для чисел. <br><code>Precise</code> — кол-во знаков после запятой.</p>
+                        </div>
+                        <div class="el-code">
+                            <pre><code>UI:AddSlider({ 
+    Name = "Power", 
+    Range = {1, 100}, 
+    Precise = 0, 
+    Step = 1,
+    Callback = function(v) end 
+})</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown -->
+                    <div class="el-row">
+                        <div class="el-info">
+                            <h4>AddDropdown</h4>
+                            <p>Список. В режиме <code>Multi</code> возвращает таблицу ключей со значениями true/false.</p>
+                        </div>
+                        <div class="el-code">
+                            <pre><code>UI:AddDropdown({ 
+    Name = "Select Hero", 
+    Values = {"Saitama", "Garou", "Genos"}, 
+    Multi = false,
+    Callback = function(v) end 
+})</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUB-MENUS (.Option) -->
+                <div class="special-note">
+                    <div class="note-title"><i data-lucide="info"></i> Вложенные меню (Proxy Objects)</div>
+                    <p>Методы <code>AddToggle</code>, <code>AddSlider</code>, <code>AddDropdown</code> и <code>AddColorPicker</code> возвращают объект, содержащий поле <code>.Option</code>. Это позволяет добавлять элементы внутрь выпадающего меню этого элемента (кнопка шестеренки).</p>
+                    <div class="code-window">
+                        <pre><code>local main = UI:AddToggle({Name = "Master", Option = true})
+main.Option:AddSlider({Name = "Sub Settings", Range = {0, 10}})</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SYSTEM UTILS -->
+            <div class="api-sub-section">
+                <h3>Системные методы</h3>
                 
-                <div class="api-method">
-                    <div class="method-header"><span class="m-name">Vantality.Bind</span> <span class="m-args">(signal: RBXScriptSignal, callback: function)</span></div>
-                    <p><strong>Критически важный метод.</strong> Подключает функцию к сигналу (например, Heartbeat). Автоматически отключает все коннекты при выгрузке скрипта, предотвращая лаги.</p>
+                <div class="method-box">
+                    <div class="method-header">
+                        <span class="method-name">Vantality.Bind</span>
+                        <span class="method-params">(signal, callback)</span>
+                    </div>
+                    <div class="method-body">
+                        <p>Безопасное подключение к сигналам (RenderStepped, Heartbeat). <strong>Обязательно к использованию:</strong> все бинды, созданные через этот метод, автоматически отключаются при выгрузке скрипта.</p>
+                    </div>
                 </div>
 
-                <div class="api-method">
-                    <div class="method-header"><span class="m-name">Vantality.Notify</span> <span class="m-args">(data: table)</span></div>
-                    <pre><code>Vantality.Notify({ Title = "Alert", Content = "Script Loaded!", Icon = "check", Duration = 5 })</code></pre>
-                    <p>Использует встроенную систему уведомлений с иконками Lucide.</p>
+                <div class="method-box">
+                    <div class="method-header">
+                        <span class="method-name">Vantality.Notify</span>
+                        <span class="method-params">(config)</span>
+                    </div>
+                    <div class="method-body">
+                        <p>Выводит красивое уведомление в углу экрана. Поддерживает иконки из Lucide.</p>
+                        <pre><code>Vantality.Notify({ Title = "Core", Content = "Loaded!", Icon = "shield", Duration = 3 })</code></pre>
+                    </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Cleanup -->
-            <section id="docs-cleanup" class="doc-block">
-                <h2 id="docs-cleanup">4. Выгрузка (OnUnload)</h2>
-                <p>Если вы определите в своем скрипте глобальную функцию <code>OnUnload</code>, она будет вызвана при нажатии пользователем кнопки "Unload" или при удалении файла.</p>
-                <div class="code-block">
-                    <pre><code>function OnUnload()
-    print("Очистка ресурсов...")
-    workspace.CurrentCamera.FieldOfView = 70
+        <!-- CLEANUP -->
+        <section id="cleanup" class="content-block">
+            <div class="block-title">
+                <i data-lucide="refresh-ccw"></i>
+                <h2>Выгрузка скрипта (Cleanup)</h2>
+            </div>
+            <p>Для предотвращения утечек памяти и артефактов в игре, всегда определяйте функцию <code>OnUnload</code>. Она вызывается ядром API в момент остановки вашего скрипта.</p>
+            <div class="code-window ide">
+                <div class="ide-header">example_cleanup.lua</div>
+                <pre><code>function OnUnload()
+    -- Возвращаем настройки игры в дефолт
+    game.Lighting.Brightness = 2
+    Vantality.Notify({ Title = "Vantality", Content = "Script Cleanup Done" })
 end</code></pre>
-                </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Rules -->
-            <section id="rules" class="doc-block accent-border">
-                <div class="block-header red"><i data-lucide="shield-check"></i> Правила публикации</div>
-                <ul class="rules">
-                    <li>Никакой обфускации. Весь код в маркетплейсе должен быть читаемым для модерации.</li>
-                    <li>Запрещены любые HTTP-запросы на сторонние логгеры (Webhook и т.д.).</li>
-                    <li>Скрипт не должен портить FPS пользователям (используйте <code>Vantality.Bind</code>).</li>
-                </ul>
-            </section>
-        </main>
-    </div>
+        <!-- FULL EXAMPLE -->
+        <section id="full-example" class="content-block">
+            <div class="block-title">
+                <i data-lucide="file-check"></i>
+                <h2>Полный пример</h2>
+            </div>
+            <div class="code-window ide large">
+                <div class="ide-header">advanced_script.lua</div>
+                <pre><code>local UI = Vantality.CreateSection("Advanced API")
+
+local KillAll = UI:AddToggle({
+    Name = "Kill All Players",
+    Risky = true,
+    Callback = function(state)
+        _G.Loop = state
+    end
+})
+
+KillAll.Option:AddSlider({
+    Name = "Kill Distance",
+    Range = {10, 500},
+    Default = 100,
+    Type = " studs"
+})
+
+Vantality.Bind(game:GetService("RunService").Heartbeat, function()
+    if _G.Loop then
+        -- логика тут
+    end
+end)
+
+function OnUnload()
+    _G.Loop = false
+end</code></pre>
+            </div>
+        </section>
+    </main>
 
     <footer class="footer">
-        <div class="footer-inner">
-            <p>Vantality Project &copy; 2026. Made by <span class="accent">grab1s</span></p>
+        <div class="footer-content">
+            <p>&copy; 2026 VANTALITY. Developed with passion by <span class="pink">grab1s</span>.</p>
+            <div class="footer-links">
+                <span>UI Base: 4lpaca</span>
+                <span>The Strongest Battlegrounds Only</span>
+            </div>
         </div>
     </footer>
 
