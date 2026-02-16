@@ -1,1 +1,1 @@
-# https-Vantality.github.io-
+vantality.github.io
