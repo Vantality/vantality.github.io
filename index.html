@@ -472,11 +472,11 @@ end)
 ------------------------
 -- эта функция вызывается автоматически, когда ты нажимаешь "Unload Script" 
 -- или удаляешь файл через меню.
--- обязательно сбрасывай тут все изменения в игре (FOV, визуалы и т.д.).
+-- обязательно сбрасывай тут все изменения в игре (визуалы и т.д.).
 
 function OnUnload()
-    print('>> Script unloaded via API.')
-    print("UI removed automatically, connections cleared.")
+    print(">> Script unloaded via API.")
+    print(">> UI removed automatically, connections cleared.")
     
     -- пример: вернули гравитацию как была
     -- workspace.Gravity = 196.2
