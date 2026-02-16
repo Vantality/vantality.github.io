@@ -1,58 +1,67 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Иконки
+    // Инициализация иконок Lucide
     lucide.createIcons();
 
-    // Плавная прокрутка
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
+    // Кастомный Highlighter для Luau
+    const highlightCode = () => {
+        const codeBlocks = document.querySelectorAll('pre code');
+        
+        const keywords = /\b(local|function|if|then|else|elseif|end|return|for|in|pairs|ipairs|while|do|and|or|not|true|false|nil)\b/g;
+        const strings = /(['"])(?:(?=(\\?))\2.)*?\1/g;
+        const comments = /(--.*)/g;
+        const functions = /\b([a-zA-Z_][a-zA-Z0-9_]*)(?=\s*\()/g;
+        const numbers = /\b(\d+)\b/g;
+
+        codeBlocks.forEach(block => {
+            let html = block.innerHTML;
+
+            // Сначала комментарии, чтобы не подсвечивать код внутри них
+            html = html.replace(comments, '<span class="hl-comment">$1</span>');
             
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
+            // Строки
+            html = html.replace(strings, '<span class="hl-string">$1</span>');
+
+            // Ключевые слова
+            html = html.replace(keywords, '<span class="hl-keyword">$1</span>');
+
+            // Числа
+            html = html.replace(numbers, '<span class="hl-val">$1</span>');
+
+            // Вызовы функций
+            html = html.replace(functions, '<span class="hl-func">$1</span>');
+
+            block.innerHTML = html;
+        });
+    };
+
+    highlightCode();
+
+    // Анимация плавного появления элементов при скролле
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
             }
         });
+    }, observerOptions);
+
+    document.querySelectorAll('.content-block, .method-box, .m-card').forEach(el => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(20px)";
+        el.style.transition = "all 0.6s cubic-bezier(0.22, 1, 0.36, 1)";
+        observer.observe(el);
     });
 
-    // Скролл-шпион для сайдбара
-    const sections = document.querySelectorAll('.doc-block, section[id]');
-    const navLinks = document.querySelectorAll('.sidebar-section a');
-
+    // Обработчик для плавного появления (скрипт просто меняет opacity)
     window.addEventListener('scroll', () => {
-        let current = "";
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (pageYOffset >= (sectionTop - 120)) {
-                current = section.getAttribute('id');
-            }
+        document.querySelectorAll('.visible').forEach(el => {
+            el.style.opacity = "1";
+            el.style.transform = "translateY(0)";
         });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').includes(current)) {
-                link.classList.add('active');
-                link.style.color = "#ff6a85";
-                link.style.paddingLeft = "10px";
-            } else {
-                link.style.color = "";
-                link.style.paddingLeft = "";
-            }
-        });
-    });
-
-    // Декоративный эффект для кода
-    document.querySelectorAll('pre code').forEach(block => {
-        // Тут можно добавить полноценный Prism.js, но для легкости просто добавим стилизацию строк
-        const text = block.innerText;
-        const coloredText = text
-            .replace(/(local|function|if|then|end|return|for|in|pairs)/g, '<span style="color: #ff6a85;">$1</span>')
-            .replace(/(".+?")/g, '<span style="color: #ce9178;">$1</span>')
-            .replace(/(--.+)/g, '<span style="color: #6a9955;">$1</span>');
-        block.innerHTML = coloredText;
     });
 });
