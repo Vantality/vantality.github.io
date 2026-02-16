@@ -18,7 +18,7 @@
             <nav class="top-nav">
                 <a href="#market">Marketplace</a>
                 <a href="#api">Luau API</a>
-                <a href="#cleanup">OnUnload</a>
+
                 <a href="https://t.me/ahk_gbs" class="btn-primary">Telegram</a>
             </nav>
         </div>
@@ -27,7 +27,7 @@
     <section class="hero-section">
         <div class="hero-content">
             <h1 class="glow-text">LUAU SCRIPTING API</h1>
-            <p>Подробная документация по созданию кастомных скриптов для экосистемы Vantality.</p>
+            <p>Подробная документация по созданию скриптов для Vantality.</p>
         </div>
     </section>
 
@@ -38,23 +38,23 @@
                 <i data-lucide="shopping-cart"></i>
                 <h2>Marketplace System</h2>
             </div>
-            <p class="section-desc">Ваши скрипты и конфиги попадают в общую базу данных. Маркетплейс автоматически управляет версиями, позволяя пользователям скачивать, обновлять и удалять ваши работы в один клик.</p>
+            <p class="section-desc">Ваши скрипты и конфиги могут стать доступны каждому, позволяя пользователям скачивать, обновлять и удалять ваши работы в один клик.</p>
             
             <div class="market-grid">
                 <div class="m-card">
                     <div class="m-icon"><i data-lucide="file-code"></i></div>
                     <h3>Scripts</h3>
-                    <p>Пользовательские Luau модули. Загружаются в песочнице с доступом к <code>Vantality</code> API.</p>
+                    <p>Пользовательские Luau скрипты, с доступом к <code>Vantality</code> API.</p>
                 </div>
                 <div class="m-card">
                     <div class="m-icon"><i data-lucide="settings"></i></div>
                     <h3>Main Configs</h3>
-                    <p>JSON-пресеты для настроек основного меню (FOV, World, Player).</p>
+                    <p>Можете делиться своими великолепными настройками с каждым.</p>
                 </div>
                 <div class="m-card">
                     <div class="m-icon"><i data-lucide="layout"></i></div>
                     <h3>Script Configs</h3>
-                    <p>Настройки для API-скриптов. Сохраняются автоматически при изменении значений в UI.</p>
+                    <p>Публикуйте свою настройку под любой скрипт.</p>
                 </div>
             </div>
         </section>
@@ -69,7 +69,7 @@
             <!-- Intro -->
             <div class="api-sub-section">
                 <h3>Введение и Конфигурация</h3>
-                <p>Все скрипты выполняются в изолированном окружении. API автоматически загружает и сохраняет значения элементов. </p>
+                <p>Все скрипты выполняются в изолированном окружении. API автоматически сохраняет и загружает ваши настройки для скриптов. </p>
                 <ul class="text-list">
                     <li><strong>Ключ сохранения:</strong> API ищет параметр <code>Flag</code>. Если он отсутствует, используется <code>Name</code>.</li>
                     <li><strong>Nested Menus:</strong> Большинство элементов поддерживают вложенные меню через кнопку шестерёнки.</li>
@@ -81,7 +81,7 @@
                         <span class="method-return">returns: SectionProxy</span>
                     </div>
                     <div class="method-body">
-                        <p>Инициализирует новую секцию. API само выберет оптимальную колонку для отрисовки.</p>
+                        <p>Инициализирует новую секцию. API само подбирает колонку для расположения секции.</p>
                         <div class="code-window">
                             <pre><code>local UI = Vantality.CreateSection("General Settings")</code></pre>
                         </div>
@@ -98,7 +98,7 @@
                     <div class="el-row">
                         <div class="el-info">
                             <h4>AddToggle</h4>
-                            <p>Стандартный переключатель. <br><code>Risky:</code> оранжевый текст. <br><code>Option:</code> включает вложенное меню.</p>
+                            <p>Стандартный переключатель. <br><code>Risky:</code> оранжевый текст, который выделяет элемент из серой массы. <br><code>Option:</code> включает вложенное меню.</p>
                         </div>
                         <div class="el-code">
                             <pre><code>UI:AddToggle({ 
@@ -199,7 +199,7 @@
                     <div class="el-row">
                         <div class="el-info">
                             <h4>AddKeybind</h4>
-                            <p>Привязка клавиши. Поддерживает Enum и ввод от пользователя.</p>
+                            <p>Привязка клавиши. Поддерживает Enum и бинд пользователя.</p>
                         </div>
                         <div class="el-code">
                             <pre><code>UI:AddKeybind({ 
@@ -231,7 +231,7 @@
                     <p>При создании элемента с параметром <code>Option = true</code>, вызов метода возвращает объект, содержащий свойство <code>.Option</code>. Это полнофункциональный контейнер <code>Elements</code>.</p>
                     <div class="code-window">
                         <pre><code>local master = UI:AddToggle({ Name = "Main Switch", Option = true })
--- Добавляем кнопку ВНУТРЬ тоггла (появится при клике на шестеренку)
+-- Добавляем кнопку во ВНУТРЬ тоггла (появится при клике на шестеренку)
 master.Option:AddButton({ Name = "Internal Action", Callback = function() end })</code></pre>
                     </div>
                 </div>
