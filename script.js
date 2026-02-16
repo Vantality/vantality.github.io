@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Инициализация иконок Lucide
     lucide.createIcons();
 
-    // Кастомный Highlighter для Luau
     const highlightCode = () => {
         const codeBlocks = document.querySelectorAll('pre code');
         
@@ -15,19 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
         codeBlocks.forEach(block => {
             let html = block.innerHTML;
 
-            // Сначала комментарии
             html = html.replace(comments, '<span class="hl-comment">$1</span>');
             
-            // Строки
             html = html.replace(strings, '<span class="hl-string">$1</span>');
 
-            // Ключевые слова
             html = html.replace(keywords, '<span class="hl-keyword">$1</span>');
 
-            // Числа
             html = html.replace(numbers, '<span class="hl-val">$1</span>');
 
-            // Вызовы функций
             html = html.replace(functions, '<span class="hl-func">$1</span>');
 
             block.innerHTML = html;
@@ -36,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     highlightCode();
 
-    // Анимация плавного появления элементов при скролле
     const observerOptions = {
         threshold: 0.1,
         rootMargin: "0px 0px -50px 0px"
