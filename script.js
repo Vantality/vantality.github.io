@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         codeBlocks.forEach(block => {
             let html = block.innerHTML;
 
-            // Сначала комментарии, чтобы не подсвечивать код внутри них
+            // Сначала комментарии
             html = html.replace(comments, '<span class="hl-comment">$1</span>');
             
             // Строки
@@ -50,14 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    document.querySelectorAll('.content-block, .method-box, .m-card').forEach(el => {
+    document.querySelectorAll('.content-block, .method-box, .m-card, .el-row').forEach(el => {
         el.style.opacity = "0";
         el.style.transform = "translateY(20px)";
         el.style.transition = "all 0.6s cubic-bezier(0.22, 1, 0.36, 1)";
         observer.observe(el);
     });
 
-    // Обработчик для плавного появления (скрипт просто меняет opacity)
     window.addEventListener('scroll', () => {
         document.querySelectorAll('.visible').forEach(el => {
             el.style.opacity = "1";
