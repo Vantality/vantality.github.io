@@ -227,11 +227,11 @@
 
                 <!-- SUB-MENUS EXPLAINED -->
                 <div class="special-note">
-                    <div class="note-title"><i data-lucide="layers"></i> Прокси-объекты и Nested Option</div>
+                    <div class="note-title"><i data-lucide="layers"></i> Прокси объекты и Nested Option</div>
                     <p>При создании элемента с параметром <code>Option = true</code>, вызов метода возвращает объект, содержащий свойство <code>.Option</code>. Это полнофункциональный контейнер <code>Elements</code>.</p>
                     <div class="code-window">
                         <pre><code>local master = UI:AddToggle({ Name = "Main Switch", Option = true }) -- закидываем .Option в переменную, для удобства
--- вписываем нашу переменную перед .Option и добавляем кнопку ВНУТРЬ тоггла (появится при клике на шестеренку)
+-- Вписываем нашу переменную перед .Option и добавляем кнопку ВНУТРЬ тоггла (появится при клике на шестеренку)
 master.Option:AddButton({ Name = "Internal Action", Callback = function() end })</code></pre>
                     </div>
                 </div>
@@ -262,7 +262,7 @@ end)</code></pre>
                         <span class="method-params">(config: table)</span>
                     </div>
                     <div class="method-body">
-                        <p>Вызов нативного уведомления. Список доступных иконок соответствует библиотеке <strong>Lucide</strong>.</p>
+                        <p>Вызов уведомления.</p>
                         <div class="code-window">
                             <pre><code>Vantality.Notify({ 
     Title = "Success", 
@@ -282,14 +282,14 @@ end)</code></pre>
                 <i data-lucide="refresh-ccw"></i>
                 <h2>Жизненный цикл и OnUnload</h2>
             </div>
-            <p>Когда пользователь нажимает "Unload" или удаляет ваш скрипт из списка, Vantality вызывает глобальную функцию <code>OnUnload</code>, если она определена. Это ваш шанс вернуть игру в исходное состояние.</p>
+            <p>Когда пользователь нажимает "Unload" или удаляет ваш скрипт, API вызывает глобальную функцию <code>OnUnload</code>, если она определена. С её помощью вы должны игру в исходное состояние.</p>
             <div class="code-window ide">
                 <div class="ide-header">cleanup_logic.lua</div>
                 <pre><code>-- Сохраняем оригинальные параметры
 local oldFog = game.Lighting.FogEnd
 
 function OnUnload()
-    -- Обязательно возвращаем всё как было!
+    -- Обязательно возвращаем всё как было
     game.Lighting.FogEnd = oldFog
     print("Script Resources Cleared")
 end</code></pre>
@@ -302,7 +302,7 @@ end</code></pre>
                 <i data-lucide="file-check"></i>
                 <h2>Итоговый пример (Complete Script)</h2>
             </div>
-            <p class="section-desc">Демонстрация всех основных возможностей API в одном файле.</p>
+            <p class="section-desc">Пример всех основных возможностей API в одном файле.</p>
             <div class="code-window ide large">
                 <div class="ide-header">example_api.lua</div>
                 <pre><code>local UI = Vantality.CreateSection("API Showcase")
