@@ -38,7 +38,7 @@
                 <i data-lucide="shopping-cart"></i>
                 <h2>Marketplace System</h2>
             </div>
-            <p class="section-desc">Ваши скрипты и конфиги могут стать доступны каждому, позволяя пользователям скачивать, обновлять и удалять ваши работы в один клик.</p>
+            <p class="section-desc">Ваши скрипты и конфиги могут стать доступны каждому, позволяя пользователям скачивать ваши работы в один клик.</p>
             
             <div class="market-grid">
                 <div class="m-card">
@@ -48,13 +48,13 @@
                 </div>
                 <div class="m-card">
                     <div class="m-icon"><i data-lucide="settings"></i></div>
-                    <h3>Main Configs</h3>
+                    <h3>Configs</h3>
                     <p>Можете делиться своими великолепными настройками с каждым.</p>
                 </div>
                 <div class="m-card">
                     <div class="m-icon"><i data-lucide="layout"></i></div>
-                    <h3>Script Configs</h3>
-                    <p>Публикуйте свою настройку под любой скрипт.</p>
+                    <h3>Main</h3>
+                    <p>Храните лайкнутые, избранные и установленные скрипты в одном месте, чтобы не потерять иж..</p>
                 </div>
             </div>
         </section>
@@ -69,9 +69,9 @@
             <!-- Intro -->
             <div class="api-sub-section">
                 <h3>Введение и Конфигурация</h3>
-                <p>Все скрипты выполняются в изолированном окружении. API автоматически сохраняет и загружает ваши настройки для скриптов. </p>
+                <p>Все скрипты выполняются в собственном окружении. API автоматически сохраняет и загружает ваши настройки для скриптов. </p>
                 <ul class="text-list">
-                    <li><strong>Ключ сохранения:</strong> API ищет параметр <code>Flag</code>. Если он отсутствует, используется <code>Name</code>.</li>
+                    <li><strong>Сохранения:</strong> API ищет параметр <code>Flag</code>. Если он отсутствует, используется <code>Name</code>.</li>
                     <li><strong>Nested Menus:</strong> Большинство элементов поддерживают вложенные меню через кнопку шестерёнки.</li>
                 </ul>
                 <div class="method-box">
@@ -98,7 +98,7 @@
                     <div class="el-row">
                         <div class="el-info">
                             <h4>AddToggle</h4>
-                            <p>Стандартный переключатель. <br><code>Risky:</code> оранжевый текст, который выделяет элемент из серой массы. <br><code>Option:</code> включает вложенное меню.</p>
+                            <p>Обычный переключатель. <br><code>Risky:</code> оранжевый текст, который выделяет элемент из серой массы. <br><code>Option:</code> включает вложенное меню.</p>
                         </div>
                         <div class="el-code">
                             <pre><code>UI:AddToggle({ 
@@ -115,7 +115,7 @@
                     <div class="el-row">
                         <div class="el-info">
                             <h4>AddSlider (Integer)</h4>
-                            <p>Слайдер для целых чисел. Используйте <code>Step</code> для шага и <code>Type</code> для суффикса (%, s, studs).</p>
+                            <p>Слайдер для целых чисел. Используйте <code>Step</code> для шага при настройке и <code>Type</code> для суффикса (%, s, studs).</p>
                         </div>
                         <div class="el-code">
                             <pre><code>UI:AddSlider({ 
@@ -262,7 +262,7 @@ end)</code></pre>
                         <span class="method-params">(config: table)</span>
                     </div>
                     <div class="method-body">
-                        <p>Вызов уведомления.</p>
+                        <p>Всплывающее уведомление.</p>
                         <div class="code-window">
                             <pre><code>Vantality.Notify({ 
     Title = "Success", 
@@ -305,14 +305,10 @@ end</code></pre>
             <p class="section-desc">Пример всех основных возможностей API в одном файле.</p>
             <div class="code-window ide large">
                 <div class="ide-header">example_api.lua</div>
-                <pre><code>local UI = Vantality.CreateSection("API Showcase")
-
--- VANTALITY LUAU API EXAMPLE
 -- тут показаны все элементы и правильная логика работы.
 
-
 -- 1. просто создаёшь секцию, дав ей название
-local UI = Vantality.CreateSection("LUAU API  EXAMPLE")
+local UI = Vantality.CreateSection("LUAU API EXAMPLE")
 
 
 -- 2. обычный тоггл.
