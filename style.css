@@ -123,20 +123,40 @@ body {
 .el-info h4 { color: var(--accent); margin-bottom: 8px; font-size: 18px; }
 .el-info p { font-size: 14px; color: var(--text-dark); }
 
-/* Code Windows */
+/* ==== FIXED CODE WINDOWS ==== */
 .code-window {
-    background: var(--code-bg); padding: 15px;
-    border-radius: 4px; border: 1px solid var(--stroke);
-    overflow-x: auto;
-    position: relative; /* Необходим для позиционирования copy-btn */
+    background: var(--code-bg);
+    border-radius: 4px; 
+    border: 1px solid var(--stroke);
+    overflow: hidden; /* Prevent visual overflow */
+    display: flex; 
+    flex-direction: column;
 }
 
-.ide { border-top: 2px solid var(--accent); padding-top: 0; }
-.ide-header { 
-    background: var(--stroke); padding: 5px 15px; 
-    font-size: 11px; color: var(--text-dark); font-family: 'JetBrains Mono';
-    margin: 0 -15px 15px -15px;
+.ide-header {
+    background: var(--stroke); 
+    padding: 8px 15px;
+    font-size: 11px; 
+    color: var(--text-dark); 
+    font-family: 'JetBrains Mono', monospace;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    border-bottom: 1px solid var(--stroke);
 }
+
+.ide-title {
+    opacity: 0.8;
+}
+
+.code-window pre {
+    padding: 15px;
+    margin: 0;
+    overflow-x: auto; /* Scrollbar applies ONLY to the code block, not the whole window */
+}
+
+.code-window pre::-webkit-scrollbar { height: 6px; }
+.code-window pre::-webkit-scrollbar-thumb { background-color: #2a2a2a; border-radius: 3px; }
 
 pre code {
     font-family: 'JetBrains Mono', monospace;
@@ -145,31 +165,26 @@ pre code {
 
 /* Copy Code Button */
 .copy-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: var(--container);
-    border: 1px solid var(--stroke);
-    border-radius: 4px;
+    background: transparent;
+    border: none;
     color: var(--text-dark);
     cursor: pointer;
-    padding: 6px;
+    padding: 4px;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: 0.2s ease;
-    z-index: 10;
+    outline: none;
 }
 
 .copy-btn:hover {
     color: var(--text);
-    border-color: var(--accent);
-    background: var(--element);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .copy-btn i {
-    width: 14px;
-    height: 14px;
+    width: 14px; height: 14px;
 }
 
 /* Syntax Highlighting */
@@ -178,7 +193,7 @@ pre code {
 .hl-comment { color: #6a9955; font-style: italic; }
 .hl-func { color: #dcdcaa; }
 .hl-val { color: #b5cea8; }
-.hl-luau { color: #4fc1ff; } /* Цвет для глобальных функций/классов роблокса */
+.hl-luau { color: #4fc1ff; } 
 
 /* ICONS GRID SECTION */
 .icons-wrapper {
