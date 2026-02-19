@@ -264,8 +264,8 @@
                     <div class="note-title"><i data-lucide="layers"></i> Прокси объекты и Nested Option</div>
                     <p>При создании элемента с параметром <code>Option = true</code>, вызов метода возвращает объект, содержащий свойство <code>.Option</code>. Это полнофункциональный контейнер <code>Elements</code>.</p>
                     <div class="code-window">
-                        <pre><code>local master = UI:AddToggle({ Name = "Main Switch", Option = true }) -- закидываем .Option в переменную, для удобства
--- Вписываем нашу переменную перед .Option и добавляем кнопку ВНУТРЬ тоггла (появится при клике на шестеренку)
+                        <pre><code>local master = UI:AddToggle({ Name = "Main Switch", Option = true }) -- .Option в переменной для удобства
+-- Пишем нашу переменную перед .Option и добавляем кнопку ВНУТРЬ тоггла (появится при клике на шестеренку)
 master.Option:AddButton({ Name = "Internal Action", Callback = function() end })</code></pre>
                     </div>
                 </div>
