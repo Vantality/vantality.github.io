@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;600;700;900&display=swap');
 
 :root {
@@ -123,68 +124,22 @@ body {
 .el-info h4 { color: var(--accent); margin-bottom: 8px; font-size: 18px; }
 .el-info p { font-size: 14px; color: var(--text-dark); }
 
-/* ==== FIXED CODE WINDOWS ==== */
+/* Code Windows */
 .code-window {
-    background: var(--code-bg);
-    border-radius: 4px; 
-    border: 1px solid var(--stroke);
-    overflow: hidden;
-    display: flex; 
-    flex-direction: column;
+    background: var(--code-bg); padding: 15px;
+    border-radius: 4px; border: 1px solid var(--stroke);
+    overflow-x: auto;
 }
 
-.ide-header {
-    background: var(--stroke); 
-    padding: 8px 15px;
-    font-size: 11px; 
-    color: var(--text-dark); 
-    font-family: 'JetBrains Mono', monospace;
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-    border-bottom: 1px solid var(--stroke);
+.ide { border-top: 2px solid var(--accent); }
+.ide-header { 
+    background: var(--stroke); padding: 5px 15px; 
+    font-size: 11px; color: var(--text-dark); font-family: 'JetBrains Mono';
 }
-
-.ide-title {
-    opacity: 0.8;
-}
-
-.code-window pre {
-    padding: 15px;
-    margin: 0;
-    overflow-x: auto; /* Scrollbar applies ONLY to the code block, not the whole window */
-}
-
-.code-window pre::-webkit-scrollbar { height: 6px; }
-.code-window pre::-webkit-scrollbar-thumb { background-color: #2a2a2a; border-radius: 3px; }
 
 pre code {
     font-family: 'JetBrains Mono', monospace;
     font-size: 13px;
-}
-
-/* Copy Code Button */
-.copy-btn {
-    background: transparent;
-    border: none;
-    color: var(--text-dark);
-    cursor: pointer;
-    padding: 4px;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.2s ease;
-    outline: none;
-}
-
-.copy-btn:hover {
-    color: var(--text);
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.copy-btn i {
-    width: 14px; height: 14px;
 }
 
 /* Syntax Highlighting */
@@ -193,7 +148,6 @@ pre code {
 .hl-comment { color: #6a9955; font-style: italic; }
 .hl-func { color: #dcdcaa; }
 .hl-val { color: #b5cea8; }
-.hl-luau { color: #4fc1ff; } 
 
 /* ICONS GRID SECTION */
 .icons-wrapper {
