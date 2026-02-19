@@ -1,3 +1,5 @@
+--- START OF FILE style.css ---
+
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;600;700;900&display=swap');
 
 :root {
@@ -148,6 +150,70 @@ pre code {
 .hl-func { color: #dcdcaa; }
 .hl-val { color: #b5cea8; }
 
+/* ICONS GRID SECTION */
+.icons-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.icon-group {
+    background: var(--container);
+    border: 1px solid var(--stroke);
+    border-radius: 4px;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+.icon-group:hover {
+    border-color: var(--accent);
+}
+
+.icon-group h3 {
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--stroke);
+}
+
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 12px;
+}
+
+.icon-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--element);
+    padding: 6px 10px;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    transition: 0.2s;
+}
+
+.icon-box:hover {
+    border-color: var(--stroke);
+    background: #1a1a1a;
+}
+
+.icon-box i {
+    width: 16px; 
+    height: 16px;
+    color: var(--text);
+}
+
+.icon-box span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dark);
+}
+
 /* Misc */
 .special-note {
     background: rgba(255, 106, 133, 0.05);
@@ -168,4 +234,8 @@ pre code {
     .el-row { grid-template-columns: 1fr; gap: 15px; }
     .header-inner { padding: 0 15px; }
     .top-nav a:not(.btn-primary) { display: none; }
+    
+    /* Icons Mobile */
+    .icons-wrapper { grid-template-columns: 1fr; }
+    .icon-grid { grid-template-columns: repeat(2, 1fr); }
 }
