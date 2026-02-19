@@ -73,7 +73,7 @@
                 <ul class="text-list">
                     <li><strong>Где находятся скрипты и конфиги?:</strong> Чтобы найти папку со скриптами, перейдите по следующему пути внутри папки вашего эксплойта: <code>/workspace/Vantality/scripts.</code> Папка с конфигами находится по пути: <code>/workspace/Vantality/Config/Main.</code></li>
                     <li><strong>Как начать создавать свои собственные скрипты?:</strong> Перед созданием первого скрипта ознакомьтесь с документацией ниже. <br> После изучения перейдите по пути <code>/workspace/Vantality/scripts</code> и создайте файл с расширением <code>.luau</code></li>
-                    <li><strong>Как добавить свой скрипт в маркетплейс?:</strong> После того как вы создадите свой скрипт, скопируйте его код и опубликуйте на <code>GitHub</code>, <code>Pastebin</code> или любом другом сервисе с поддержкой raw-ссылок. После этого подайте заявку на публикацию в Telegram-боте:<br><code>ahkgbs_bot</code>. <code>( /start -> Мой профиль -> Для разработчиков -> Добавить script )</code><br> <em>(P.S. Обфусцированные скрипты принимаются, но проверяются модерацией)</em></li>
+                    <li><strong>Как добавить свой скрипт в маркетплейс?:</strong> После того как вы создадите свой скрипт, скопируйте его код и опубликуйте на <code>GitHub</code>, <code>Pastebin</code> или любом другом сервисе с поддержкой raw-ссылок. После этого подайте заявку на публикацию в Telegram-боте:<br><code>ahkgbs_bot</code>. <code>( /start -> Мой профиль -> Для разработчиков -> Добавить script )</code><br></li>
                     <li><strong>Как добавить свой конфиг в маркетплейс?:</strong> Сохраните настройки вашего конфигов, затем перейдите по пути <code>/workspace/Vantality/Config/Main</code> и откройте файл вашего конфига в Блокноте. Скопируйте его содержимое и опубликуйте на <code>GitHub</code>, <code>Pastebin</code> или любом другом сервисе с поддержкой raw-ссылок. После этого подайте заявку на публикацию в Telegram-боте: <br><code>ahkgbs_bot ( /start → Мой профиль → Для разработчиков → Добавить config )</code><br></li>
                     <li><strong>Если у вас возникнет больше вопросов, вы можете обратиться в чат поддержки нашего телеграм бота:</strong> <code>ahkgbs_bot</code></li>                
                 </ul>
@@ -97,23 +97,6 @@
                 <h3>Создание элементов (UI Methods)</h3>
                 
                 <div class="element-table">
-
-                    <!-- Paragraph -->
-                    <div class="el-row">
-                        <div class="el-info">
-                            <h4>AddParagraph</h4>
-                            <p>Информационный блок с заголовком и описанием. <br>Не имеет Callback, служит исключительно для оформления и подачи инфы внутри секции.</p>
-                        </div>
-                        <div class="el-code">
-                            <div class="code-window">
-                                <pre><code>UI:AddParagraph({ 
-    Title = "Внимание", 
-    Content = "Эта функция очень ресурсоемкая, используйте на свой страх и риск." 
-})</code></pre>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Toggle -->
                     <div class="el-row">
                         <div class="el-info">
@@ -121,33 +104,13 @@
                             <p>Обычный переключатель. <br><code>Risky:</code> оранжевый текст, который выделяет элемент из серой массы. <br><code>Option:</code> включает вложенное меню.</p>
                         </div>
                         <div class="el-code">
-                            <div class="code-window">
-                                <pre><code>UI:AddToggle({ 
+                            <pre><code>UI:AddToggle({ 
     Name = "God Mode", 
     Default = false, 
     Risky = true,
     Option = true,
     Callback = function(state) end 
 })</code></pre>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Input -->
-                    <div class="el-row">
-                        <div class="el-info">
-                            <h4>AddInput</h4>
-                            <p>Поле для ввода текста. <br><code>PlaceholderText:</code> полупрозрачный текст-подсказка при пустом поле.</p>
-                        </div>
-                        <div class="el-code">
-                            <div class="code-window">
-                                <pre><code>UI:AddInput({ 
-    Name = "Target Username", 
-    PlaceholderText = "введите ник...",
-    Default = "grab1s",
-    Callback = function(text) end 
-})</code></pre>
-                            </div>
                         </div>
                     </div>
 
@@ -158,8 +121,7 @@
                             <p>Слайдер для целых чисел. Используйте <code>Step</code> для шага при настройке и <code>Type</code> для суффикса (%, s, studs).</p>
                         </div>
                         <div class="el-code">
-                            <div class="code-window">
-                                <pre><code>UI:AddSlider({ 
+                            <pre><code>UI:AddSlider({ 
     Name = "WalkSpeed", 
     Range = {16, 200}, 
     Default = 16, 
@@ -167,7 +129,6 @@
     Type = " studs",
     Callback = function(v) end 
 })</code></pre>
-                            </div>
                         </div>
                     </div>
 
@@ -178,15 +139,13 @@
                             <p>Для дробных значений (Float). <br><code>Precise:</code> кол-во знаков после запятой.</p>
                         </div>
                         <div class="el-code">
-                            <div class="code-window">
-                                <pre><code>UI:AddSlider({ 
+                            <pre><code>UI:AddSlider({ 
     Name = "Jump Height", 
     Range = {0, 1}, 
     Default = 0.5, 
     Precise = 2,
     Callback = function(v) end 
 })</code></pre>
-                            </div>
                         </div>
                     </div>
 
@@ -197,14 +156,12 @@
                             <p>Одиночный выбор строки из списка <code>Values</code>. Возвращает строку.</p>
                         </div>
                         <div class="el-code">
-                            <div class="code-window">
-                                <pre><code>UI:AddDropdown({ 
+                            <pre><code>UI:AddDropdown({ 
     Name = "Target Bone", 
     Values = {"Head", "Torso", "Random"}, 
     Default = "Head",
     Callback = function(v) end 
 })</code></pre>
-                            </div>
                         </div>
                     </div>
 
@@ -212,18 +169,16 @@
                     <div class="el-row">
                         <div class="el-info">
                             <h4>AddDropdown (Multi)</h4>
-                            <p>Множественный выбор. <br><strong>Callback:</strong> возвращает таблицу <code>{ = bool }</code>.</p>
+                            <p>Множественный выбор. <br><strong>Callback:</strong> возвращает таблицу <code>{ [Name] = bool }</code>.</p>
                         </div>
                         <div class="el-code">
-                            <div class="code-window">
-                                <pre><code>UI:AddDropdown({ 
+                            <pre><code>UI:AddDropdown({ 
     Name = "Filters", 
     Values = {"Players", "NPCs"}, 
-    Default = { = true},
+    Default = {["Players"] = true},
     Multi = true,
     Callback = function(tbl) end 
 })</code></pre>
-                            </div>
                         </div>
                     </div>
 
@@ -234,14 +189,12 @@
                             <p>Выбор цвета. <br><code>Transparency:</code> поддержка альфа-канала (0-1).</p>
                         </div>
                         <div class="el-code">
-                            <div class="code-window">
-                                <pre><code>UI:AddColorPicker({ 
+                            <pre><code>UI:AddColorPicker({ 
     Name = "ESP Color", 
     Default = Color3.fromRGB(255, 0, 0),
     Transparency = 0.5,
     Callback = function(color, alpha) end 
 })</code></pre>
-                            </div>
                         </div>
                     </div>
 
@@ -252,13 +205,11 @@
                             <p>Привязка клавиши. Поддерживает Enum и бинд пользователя.</p>
                         </div>
                         <div class="el-code">
-                            <div class="code-window">
-                                <pre><code>UI:AddKeybind({ 
+                            <pre><code>UI:AddKeybind({ 
     Name = "Flight Key", 
     Default = Enum.KeyCode.F,
     Callback = function(key) end 
 })</code></pre>
-                            </div>
                         </div>
                     </div>
 
@@ -269,12 +220,10 @@
                             <p>Простое действие без сохранения состояния.</p>
                         </div>
                         <div class="el-code">
-                            <div class="code-window">
-                                <pre><code>UI:AddButton({ 
+                            <pre><code>UI:AddButton({ 
     Name = "Reset All", 
     Callback = function() end 
 })</code></pre>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -287,54 +236,6 @@
                         <pre><code>local master = UI:AddToggle({ Name = "Main Switch", Option = true }) -- закидываем .Option в переменную, для удобства
 -- Вписываем нашу переменную перед .Option и добавляем кнопку ВНУТРЬ тоггла (появится при клике на шестеренку)
 master.Option:AddButton({ Name = "Internal Action", Callback = function() end })</code></pre>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ELEMENT METHODS -->
-            <div class="api-sub-section">
-                <h3>Методы элементов (Element Methods)</h3>
-                <p class="section-desc">Каждый созданный вами элемент (Toggle, Slider, Dropdown и т.д.) возвращает прокси-объект. Через него вы можете менять состояние элемента программно, не заставляя юзера кликать руками.</p>
-                
-                <div class="method-box">
-                    <div class="method-header">
-                        <span class="method-name">Element:GetValue</span>
-                        <span class="method-params">()</span>
-                        <span class="method-return">returns: any</span>
-                    </div>
-                    <div class="method-body">
-                        <p>Возвращает текущее значение элемента (boolean для тоггла, number для слайдера и т.д.). Идеально для использования внутри циклов (например, <code>RenderStepped</code>), чтобы не создавать локальные переменные под каждое значение.</p>
-                        <div class="code-window">
-                            <pre><code>local fov = FovSlider:GetValue()
-camera.FieldOfView = fov</code></pre>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="method-box">
-                    <div class="method-header">
-                        <span class="method-name">Element:SetValue</span>
-                        <span class="method-params">(value: any, force: boolean?)</span>
-                    </div>
-                    <div class="method-body">
-                        <p>Устанавливает новое значение для элемента. Если аргумент <code>force</code> установлен в <code>true</code>, то принудительно вызовется <code>Callback</code> данного элемента при смене значения.</p>
-                        <div class="code-window">
-                            <pre><code>-- Выключаем тоггл и триггерим его Callback
-GodModeToggle:SetValue(false, true)</code></pre>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="method-box">
-                    <div class="method-header">
-                        <span class="method-name">Element:Rename</span>
-                        <span class="method-params">(newName: string)</span>
-                    </div>
-                    <div class="method-body">
-                        <p>Динамически меняет название элемента в пользовательском интерфейсе.</p>
-                        <div class="code-window">
-                            <pre><code>StatusLabel:Rename("Status: Connected")</code></pre>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -384,8 +285,8 @@ end)</code></pre>
                 <i data-lucide="refresh-ccw"></i>
                 <h2>Жизненный цикл и OnUnload</h2>
             </div>
-            <p>Когда пользователь нажимает "Unload" или удаляет ваш скрипт, API вызывает глобальную функцию <code>OnUnload</code>, если она определена. С её помощью вы должны вернуть игру в исходное состояние.</p>
-            <div class="code-window">
+            <p>Когда пользователь нажимает "Unload" или удаляет ваш скрипт, API вызывает глобальную функцию <code>OnUnload</code>, если она определена. С её помощью вы должны игру в исходное состояние.</p>
+            <div class="code-window ide">
                 <div class="ide-header">cleanup_logic.lua</div>
                 <pre><code>-- Сохраняем оригинальные параметры
 local oldFog = game.Lighting.FogEnd
@@ -405,9 +306,10 @@ end</code></pre>
                 <h2>Итоговый пример (Complete Script)</h2>
             </div>
             <p class="section-desc">Пример всех основных возможностей API в одном файле.</p>
-            <div class="code-window large">
+            <div class="code-window ide large">
                 <div class="ide-header">example_api.lua</div>
-<pre><code>-- 1. создаём секцию
+<pre><code>
+-- 1. создаём секцию
 local UI = Vantality.CreateSection("TSB VISUALS EXTENSION")
 
 -- 2. параграфы (текст для инфы внутри секции)
@@ -557,7 +459,8 @@ function OnUnload()
 
 	-- бекапаем стейты игры в исходную
 	-- game.Lighting.FogEnd = 100000
-end</code></pre>
+end
+</code></pre>
             </div>
         </section>
 
