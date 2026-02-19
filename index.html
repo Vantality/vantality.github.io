@@ -105,10 +105,12 @@
                             <p>Информационный блок с заголовком и описанием. <br>Не имеет Callback, служит исключительно для оформления и подачи инфы внутри секции.</p>
                         </div>
                         <div class="el-code">
-                            <pre><code>UI:AddParagraph({ 
+                            <div class="code-window">
+                                <pre><code>UI:AddParagraph({ 
     Title = "Внимание", 
     Content = "Эта функция очень ресурсоемкая, используйте на свой страх и риск." 
 })</code></pre>
+                            </div>
                         </div>
                     </div>
 
@@ -119,13 +121,15 @@
                             <p>Обычный переключатель. <br><code>Risky:</code> оранжевый текст, который выделяет элемент из серой массы. <br><code>Option:</code> включает вложенное меню.</p>
                         </div>
                         <div class="el-code">
-                            <pre><code>UI:AddToggle({ 
+                            <div class="code-window">
+                                <pre><code>UI:AddToggle({ 
     Name = "God Mode", 
     Default = false, 
     Risky = true,
     Option = true,
     Callback = function(state) end 
 })</code></pre>
+                            </div>
                         </div>
                     </div>
 
@@ -136,12 +140,14 @@
                             <p>Поле для ввода текста. <br><code>PlaceholderText:</code> полупрозрачный текст-подсказка при пустом поле.</p>
                         </div>
                         <div class="el-code">
-                            <pre><code>UI:AddInput({ 
+                            <div class="code-window">
+                                <pre><code>UI:AddInput({ 
     Name = "Target Username", 
     PlaceholderText = "введите ник...",
     Default = "grab1s",
     Callback = function(text) end 
 })</code></pre>
+                            </div>
                         </div>
                     </div>
 
@@ -152,7 +158,8 @@
                             <p>Слайдер для целых чисел. Используйте <code>Step</code> для шага при настройке и <code>Type</code> для суффикса (%, s, studs).</p>
                         </div>
                         <div class="el-code">
-                            <pre><code>UI:AddSlider({ 
+                            <div class="code-window">
+                                <pre><code>UI:AddSlider({ 
     Name = "WalkSpeed", 
     Range = {16, 200}, 
     Default = 16, 
@@ -160,6 +167,7 @@
     Type = " studs",
     Callback = function(v) end 
 })</code></pre>
+                            </div>
                         </div>
                     </div>
 
@@ -170,13 +178,15 @@
                             <p>Для дробных значений (Float). <br><code>Precise:</code> кол-во знаков после запятой.</p>
                         </div>
                         <div class="el-code">
-                            <pre><code>UI:AddSlider({ 
+                            <div class="code-window">
+                                <pre><code>UI:AddSlider({ 
     Name = "Jump Height", 
     Range = {0, 1}, 
     Default = 0.5, 
     Precise = 2,
     Callback = function(v) end 
 })</code></pre>
+                            </div>
                         </div>
                     </div>
 
@@ -187,12 +197,14 @@
                             <p>Одиночный выбор строки из списка <code>Values</code>. Возвращает строку.</p>
                         </div>
                         <div class="el-code">
-                            <pre><code>UI:AddDropdown({ 
+                            <div class="code-window">
+                                <pre><code>UI:AddDropdown({ 
     Name = "Target Bone", 
     Values = {"Head", "Torso", "Random"}, 
     Default = "Head",
     Callback = function(v) end 
 })</code></pre>
+                            </div>
                         </div>
                     </div>
 
@@ -203,13 +215,15 @@
                             <p>Множественный выбор. <br><strong>Callback:</strong> возвращает таблицу <code>{ = bool }</code>.</p>
                         </div>
                         <div class="el-code">
-                            <pre><code>UI:AddDropdown({ 
+                            <div class="code-window">
+                                <pre><code>UI:AddDropdown({ 
     Name = "Filters", 
     Values = {"Players", "NPCs"}, 
     Default = { = true},
     Multi = true,
     Callback = function(tbl) end 
 })</code></pre>
+                            </div>
                         </div>
                     </div>
 
@@ -220,12 +234,14 @@
                             <p>Выбор цвета. <br><code>Transparency:</code> поддержка альфа-канала (0-1).</p>
                         </div>
                         <div class="el-code">
-                            <pre><code>UI:AddColorPicker({ 
+                            <div class="code-window">
+                                <pre><code>UI:AddColorPicker({ 
     Name = "ESP Color", 
     Default = Color3.fromRGB(255, 0, 0),
     Transparency = 0.5,
     Callback = function(color, alpha) end 
 })</code></pre>
+                            </div>
                         </div>
                     </div>
 
@@ -236,11 +252,13 @@
                             <p>Привязка клавиши. Поддерживает Enum и бинд пользователя.</p>
                         </div>
                         <div class="el-code">
-                            <pre><code>UI:AddKeybind({ 
+                            <div class="code-window">
+                                <pre><code>UI:AddKeybind({ 
     Name = "Flight Key", 
     Default = Enum.KeyCode.F,
     Callback = function(key) end 
 })</code></pre>
+                            </div>
                         </div>
                     </div>
 
@@ -251,10 +269,12 @@
                             <p>Простое действие без сохранения состояния.</p>
                         </div>
                         <div class="el-code">
-                            <pre><code>UI:AddButton({ 
+                            <div class="code-window">
+                                <pre><code>UI:AddButton({ 
     Name = "Reset All", 
     Callback = function() end 
 })</code></pre>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -264,8 +284,8 @@
                     <div class="note-title"><i data-lucide="layers"></i> Прокси объекты и Nested Option</div>
                     <p>При создании элемента с параметром <code>Option = true</code>, вызов метода возвращает объект, содержащий свойство <code>.Option</code>. Это полнофункциональный контейнер <code>Elements</code>.</p>
                     <div class="code-window">
-                        <pre><code>local master = UI:AddToggle({ Name = "Main Switch", Option = true }) -- .Option в переменной для удобства
--- Пишем нашу переменную перед .Option и добавляем кнопку ВНУТРЬ тоггла (появится при клике на шестеренку)
+                        <pre><code>local master = UI:AddToggle({ Name = "Main Switch", Option = true }) -- закидываем .Option в переменную, для удобства
+-- Вписываем нашу переменную перед .Option и добавляем кнопку ВНУТРЬ тоггла (появится при клике на шестеренку)
 master.Option:AddButton({ Name = "Internal Action", Callback = function() end })</code></pre>
                     </div>
                 </div>
@@ -365,7 +385,7 @@ end)</code></pre>
                 <h2>Жизненный цикл и OnUnload</h2>
             </div>
             <p>Когда пользователь нажимает "Unload" или удаляет ваш скрипт, API вызывает глобальную функцию <code>OnUnload</code>, если она определена. С её помощью вы должны вернуть игру в исходное состояние.</p>
-            <div class="code-window ide">
+            <div class="code-window">
                 <div class="ide-header">cleanup_logic.lua</div>
                 <pre><code>-- Сохраняем оригинальные параметры
 local oldFog = game.Lighting.FogEnd
@@ -385,7 +405,7 @@ end</code></pre>
                 <h2>Итоговый пример (Complete Script)</h2>
             </div>
             <p class="section-desc">Пример всех основных возможностей API в одном файле.</p>
-            <div class="code-window ide large">
+            <div class="code-window large">
                 <div class="ide-header">example_api.lua</div>
 <pre><code>-- 1. создаём секцию
 local UI = Vantality.CreateSection("TSB VISUALS EXTENSION")
@@ -411,7 +431,7 @@ local OverlayToggle = UI:AddToggle({
 	Name = "Screen Overlay",
 	Default = false,
 	Option = true, -- включает доп. меню справа (шестеренку)
-	Risky = true, -- красит текст в оранжевый (важная функция)
+	Risky = true, -- красит текст в оранжевый (типо важная или опасная функция, но реального предназначения я ей не даю, юзайте как вам угодно)
 	Callback = function(state)
 		print("Overlay state:", state)
 	end
@@ -446,7 +466,7 @@ local StretchSlider = UI:AddSlider({
 	Name = "Screen Stretch",
 	Range = {0, 1},
 	Default = 0.5,
-	Precise = 2, -- сколько знаков после запятой (0.50)
+	Precise = 2, -- сколько знаков после запятой (0.50) если 1, то 0.5
 	Callback = function(val)
 	end
 })
