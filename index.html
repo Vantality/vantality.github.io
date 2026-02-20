@@ -92,188 +92,247 @@
                 </div>
             </div>
 
-            <!-- UI ELEMENTS DETAILED -->
-            <div class="api-sub-section">
-                <h3>Создание элементов (UI Methods)</h3>
-                
-                <div class="element-table">
-                    <!-- Toggle -->
-                    <div class="el-row">
-                        <div class="el-info">
-                            <h4>AddToggle</h4>
-                            <p>Обычный переключатель. <br><code>Risky:</code> оранжевый текст, который выделяет элемент из серой массы. <br><code>Option:</code> включает вложенное меню.</p>
-                        </div>
-                        <div class="el-code">
-                            <pre><code>UI:AddToggle({ 
+<!-- UI ELEMENTS DETAILED -->
+        <div class="api-sub-section">
+            <h3>Создание элементов (UI Methods)</h3>
+            <p class="text-dim"><strong>Важно:</strong> Все созданные вами секции и элементы будут автоматически распределены по колонкам внутри вкладки <strong>LUAU</strong> в главном меню Vantality. <br>Во многих методах используется параметр <code>Flag</code> — он задает уникальный ключ, по которому API будет автоматически сохранять и загружать настройки вашего скрипта в папку <code>configs</code>.</p>
+            
+            <div class="element-table">
+                <!-- Paragraph -->
+                <div class="el-row">
+                    <div class="el-info">
+                        <h4>AddParagraph</h4>
+                        <p>Обычный текстовый блок для вывода информации. Автоматически подстраивается под высоту текста.</p>
+                    </div>
+                    <div class="el-code">
+                        <pre><code>UI:AddParagraph({ 
+    Title = "Information", 
+    Content = "Этот скрипт находится в стадии беты." 
+})</code></pre>
+                    </div>
+                </div>
+
+                <!-- Input -->
+                <div class="el-row">
+                    <div class="el-info">
+                        <h4>AddInput</h4>
+                        <p>Текстовое поле ввода. <br><strong>Callback:</strong> срабатывает при потере фокуса (нажатии Enter/клике вне поля).</p>
+                    </div>
+                    <div class="el-code">
+                        <pre><code>UI:AddInput({ 
+    Name = "Target Player", 
+    PlaceholderText = "Введите ник...", 
+    Default = "", 
+    Flag = "Target_Input",
+    Callback = function(text) end 
+})</code></pre>
+                    </div>
+                </div>
+
+                <!-- Toggle -->
+                <div class="el-row">
+                    <div class="el-info">
+                        <h4>AddToggle</h4>
+                        <p>Переключатель (Чекбокс). <br><code>Risky:</code> оранжевый текст, выделяет важный элемент. <br><code>Option:</code> включает вложенное меню (шестеренку).</p>
+                    </div>
+                    <div class="el-code">
+                        <pre><code>UI:AddToggle({ 
     Name = "God Mode", 
     Default = false, 
     Risky = true,
     Option = true,
+    Flag = "GodMode_Toggle",
     Callback = function(state) end 
 })</code></pre>
-                        </div>
                     </div>
+                </div>
 
-                    <!-- Integer Slider -->
-                    <div class="el-row">
-                        <div class="el-info">
-                            <h4>AddSlider (Integer)</h4>
-                            <p>Слайдер для целых чисел. Используйте <code>Step</code> для шага при настройке и <code>Type</code> для суффикса (%, s, studs).</p>
-                        </div>
-                        <div class="el-code">
-                            <pre><code>UI:AddSlider({ 
+                <!-- Integer Slider -->
+                <div class="el-row">
+                    <div class="el-info">
+                        <h4>AddSlider (Integer)</h4>
+                        <p>Слайдер для целых чисел. Используйте <code>Step</code> для шага при настройке и <code>Type</code> для суффикса (%, s, studs).</p>
+                    </div>
+                    <div class="el-code">
+                        <pre><code>UI:AddSlider({ 
     Name = "WalkSpeed", 
     Range = {16, 200}, 
     Default = 16, 
     Step = 1,
     Type = " studs",
+    Flag = "WS_Slider",
     Callback = function(v) end 
 })</code></pre>
-                        </div>
                     </div>
+                </div>
 
-                    <!-- Precise Slider -->
-                    <div class="el-row">
-                        <div class="el-info">
-                            <h4>AddSlider (Precise)</h4>
-                            <p>Для дробных значений (Float). <br><code>Precise:</code> кол-во знаков после запятой.</p>
-                        </div>
-                        <div class="el-code">
-                            <pre><code>UI:AddSlider({ 
+                <!-- Precise Slider -->
+                <div class="el-row">
+                    <div class="el-info">
+                        <h4>AddSlider (Precise)</h4>
+                        <p>Для дробных значений (Float). <br><code>Precise:</code> кол-во знаков после запятой.</p>
+                    </div>
+                    <div class="el-code">
+                        <pre><code>UI:AddSlider({ 
     Name = "Jump Height", 
     Range = {0, 1}, 
     Default = 0.5, 
     Precise = 2,
+    Flag = "JH_Slider",
     Callback = function(v) end 
 })</code></pre>
-                        </div>
-                    </div>
-
-                    <!-- Dropdown Single -->
-                    <div class="el-row">
-                        <div class="el-info">
-                            <h4>AddDropdown</h4>
-                            <p>Одиночный выбор строки из списка <code>Values</code>. Возвращает строку.</p>
-                        </div>
-                        <div class="el-code">
-                            <pre><code>UI:AddDropdown({ 
-    Name = "Target Bone", 
-    Values = {"Head", "Torso", "Random"}, 
-    Default = "Head",
-    Callback = function(v) end 
-})</code></pre>
-                        </div>
-                    </div>
-
-                    <!-- Dropdown Multi -->
-                    <div class="el-row">
-                        <div class="el-info">
-                            <h4>AddDropdown (Multi)</h4>
-                            <p>Множественный выбор. <br><strong>Callback:</strong> возвращает таблицу <code>{ [Name] = bool }</code>.</p>
-                        </div>
-                        <div class="el-code">
-                            <pre><code>UI:AddDropdown({ 
-    Name = "Filters", 
-    Values = {"Players", "NPCs"}, 
-    Default = {["Players"] = true},
-    Multi = true,
-    Callback = function(tbl) end 
-})</code></pre>
-                        </div>
-                    </div>
-
-                    <!-- Color Picker -->
-                    <div class="el-row">
-                        <div class="el-info">
-                            <h4>AddColorPicker</h4>
-                            <p>Выбор цвета. <br><code>Transparency:</code> поддержка альфа-канала (0-1).</p>
-                        </div>
-                        <div class="el-code">
-                            <pre><code>UI:AddColorPicker({ 
-    Name = "ESP Color", 
-    Default = Color3.fromRGB(255, 0, 0),
-    Transparency = 0.5,
-    Callback = function(color, alpha) end 
-})</code></pre>
-                        </div>
-                    </div>
-
-                    <!-- Keybind -->
-                    <div class="el-row">
-                        <div class="el-info">
-                            <h4>AddKeybind</h4>
-                            <p>Привязка клавиши. Поддерживает Enum и бинд пользователя.</p>
-                        </div>
-                        <div class="el-code">
-                            <pre><code>UI:AddKeybind({ 
-    Name = "Flight Key", 
-    Default = Enum.KeyCode.F,
-    Callback = function(key) end 
-})</code></pre>
-                        </div>
-                    </div>
-
-                    <!-- Button -->
-                    <div class="el-row">
-                        <div class="el-info">
-                            <h4>AddButton</h4>
-                            <p>Простое действие без сохранения состояния.</p>
-                        </div>
-                        <div class="el-code">
-                            <pre><code>UI:AddButton({ 
-    Name = "Reset All", 
-    Callback = function() end 
-})</code></pre>
-                        </div>
                     </div>
                 </div>
 
-                <!-- SUB-MENUS EXPLAINED -->
-                <div class="special-note">
-                    <div class="note-title"><i data-lucide="layers"></i> Прокси объекты и Nested Option</div>
-                    <p>При создании элемента с параметром <code>Option = true</code>, вызов метода возвращает объект, содержащий свойство <code>.Option</code>. Это полнофункциональный контейнер <code>Elements</code>.</p>
-                    <div class="code-window">
-                        <pre><code>local master = UI:AddToggle({ Name = "Main Switch", Option = true }) -- закидываем .Option в переменную, для удобства
--- Вписываем нашу переменную перед .Option и добавляем кнопку ВНУТРЬ тоггла (появится при клике на шестеренку)
-master.Option:AddButton({ Name = "Internal Action", Callback = function() end })</code></pre>
+                <!-- Dropdown Single -->
+                <div class="el-row">
+                    <div class="el-info">
+                        <h4>AddDropdown</h4>
+                        <p>Одиночный выбор строки из списка <code>Values</code>. Возвращает строку.</p>
+                    </div>
+                    <div class="el-code">
+                        <pre><code>UI:AddDropdown({ 
+    Name = "Target Bone", 
+    Values = {"Head", "Torso", "Random"}, 
+    Default = "Head",
+    Flag = "Bone_Drop",
+    Callback = function(v) end 
+})</code></pre>
+                    </div>
+                </div>
+
+                <!-- Dropdown Multi -->
+                <div class="el-row">
+                    <div class="el-info">
+                        <h4>AddDropdown (Multi)</h4>
+                        <p>Множественный выбор. <br><strong>Callback:</strong> возвращает таблицу <code>{ = bool }</code>.</p>
+                    </div>
+                    <div class="el-code">
+                        <pre><code>UI:AddDropdown({ 
+    Name = "Filters", 
+    Values = {"Players", "NPCs"}, 
+    Default = { = true, = false},
+    Multi = true,
+    Flag = "Filter_Drop",
+    Callback = function(tbl) end 
+})</code></pre>
+                    </div>
+                </div>
+
+                <!-- Color Picker -->
+                <div class="el-row">
+                    <div class="el-info">
+                        <h4>AddColorPicker</h4>
+                        <p>Выбор цвета. <br><code>Transparency:</code> поддержка альфа-канала (0-1).</p>
+                    </div>
+                    <div class="el-code">
+                        <pre><code>UI:AddColorPicker({ 
+    Name = "ESP Color", 
+    Default = Color3.fromRGB(255, 0, 0),
+    Transparency = 0.5,
+    Flag = "ESP_Color",
+    Callback = function(color, alpha) end 
+})</code></pre>
+                    </div>
+                </div>
+
+                <!-- Keybind -->
+                <div class="el-row">
+                    <div class="el-info">
+                        <h4>AddKeybind</h4>
+                        <p>Привязка клавиши. Поддерживает Enum и бинд пользователя.</p>
+                    </div>
+                    <div class="el-code">
+                        <pre><code>UI:AddKeybind({ 
+    Name = "Flight Key", 
+    Default = Enum.KeyCode.F,
+    Flag = "Flight_Key",
+    Callback = function(key) end 
+})</code></pre>
+                    </div>
+                </div>
+
+                <!-- Button -->
+                <div class="el-row">
+                    <div class="el-info">
+                        <h4>AddButton</h4>
+                        <p>Простое действие без сохранения состояния (Flag не требуется).</p>
+                    </div>
+                    <div class="el-code">
+                        <pre><code>UI:AddButton({ 
+    Name = "Reset All", 
+    Callback = function() end 
+})</code></pre>
                     </div>
                 </div>
             </div>
 
-            <!-- SYSTEM UTILS -->
+            <!-- METHODS -->
             <div class="api-sub-section">
-                <h3>Служебные функции и События</h3>
-                
-                <div class="method-box">
-                    <div class="method-header">
-                        <span class="method-name">Vantality.Bind</span>
-                        <span class="method-params">(signal: RBXScriptSignal, callback: function)</span>
-                    </div>
-                    <div class="method-body">
-                        <p><strong>Важно:</strong> Никогда не делайте <code>.Connect</code> напрямую к сигналам игры. Используйте <code>Vantality.Bind</code> — это гарантирует, что соединение будет разорвано автоматически, когда скрипт выгрузится.</p>
-                        <div class="code-window">
-                            <pre><code>Vantality.Bind(game:GetService("RunService").RenderStepped, function(dt)
-    -- Ваш цикл тут
-end)</code></pre>
-                        </div>
+                <h3>Методы элементов (Response Object)</h3>
+                <p>Каждый метод создания элемента (например, <code>AddToggle</code> или <code>AddSlider</code>) возвращает объект, с помощью которого можно управлять элементом из кода:</p>
+                <ul class="text-list">
+                    <li><code>:GetValue()</code> — возвращает текущее значение элемента. Позволяет не создавать лишних глобальных переменных для хранения стейтов.</li>
+                    <li><code>:SetValue(value, force)</code> — устанавливает новое значение. Если параметр <code>force = true</code>, принудительно вызовет функцию <code>Callback</code>.</li>
+                    <li><code>:Rename(string)</code> — изменяет отображаемое имя элемента в интерфейсе.</li>
+                </ul>
+            </div>
+
+            <!-- SUB-MENUS EXPLAINED -->
+            <div class="special-note">
+                <div class="note-title"><i data-lucide="layers"></i> Прокси объекты и Nested Option</div>
+                <p>Если элемент создан с параметром <code>Option = true</code>, возвращаемый объект содержит свойство <code>.Option</code>. Это полнофункциональный контейнер <code>Elements</code>, унаследовавший методы секции. Из него можно вызывать <code>Add...</code> методы напрямую.</p>
+                <div class="code-window">
+                    <pre><code>local master = UI:AddToggle({ Name = "Main Switch", Option = true })
+
+-- Добавляем элементы внутрь шестеренки:
+if master.Option then
+    master.Option:AddButton({ Name = "Internal Action", Callback = function() end })
+end</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- SYSTEM UTILS -->
+        <section id="api-utils" class="content-block">
+            <div class="block-title">
+                <i data-lucide="cpu"></i>
+                <h2>Служебные функции и События</h2>
+            </div>
+            
+            <div class="method-box">
+                <div class="method-header">
+                    <span class="method-name">Vantality.Bind</span>
+                    <span class="method-params">(signal: RBXScriptSignal, callback: function)</span>
+                    <span class="method-return">returns: RBXScriptConnection</span>
+                </div>
+                <div class="method-body">
+                    <p><strong>Важно:</strong> Никогда не делайте <code>.Connect</code> напрямую к сигналам игры. Используйте <code>Vantality.Bind</code> — это гарантирует, что соединение будет разорвано автоматически, когда скрипт выгрузится.<br> Метод возвращает стандартный объект соединения, который можно отключить вручную до выгрузки.</p>
+                    <div class="code-window">
+                        <pre><code>local myLoop = Vantality.Bind(game:GetService("RunService").RenderStepped, function(dt)
+    -- Ваш цикл
+end)
+
+-- Отключение вручную, если это необходимо
+-- myLoop:Disconnect()</code></pre>
                     </div>
                 </div>
+            </div>
 
-                <div class="method-box">
-                    <div class="method-header">
-                        <span class="method-name">Vantality.Notify</span>
-                        <span class="method-params">(config: table)</span>
-                    </div>
-                    <div class="method-body">
-                        <p>Всплывающее уведомление.</p>
-                        <div class="code-window">
-                            <pre><code>Vantality.Notify({ 
+            <div class="method-box">
+                <div class="method-header">
+                    <span class="method-name">Vantality.Notify</span>
+                    <span class="method-params">(config: table)</span>
+                </div>
+                <div class="method-body">
+                    <p>Отправка всплывающего уведомления в интерфейсе Vantality.</p>
+                    <div class="code-window">
+                        <pre><code>Vantality.Notify({ 
     Title = "Success", 
     Content = "Settings Applied!", 
     Icon = "check-circle", 
     Duration = 5 
 })</code></pre>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -285,7 +344,7 @@ end)</code></pre>
                 <i data-lucide="refresh-ccw"></i>
                 <h2>Жизненный цикл и OnUnload</h2>
             </div>
-            <p>Когда пользователь нажимает "Unload" или удаляет ваш скрипт, API вызывает глобальную функцию <code>OnUnload</code>, если она определена. С её помощью вы должны игру в исходное состояние.</p>
+            <p>Когда пользователь нажимает "Unload" или удаляет ваш скрипт, API вызывает глобальную функцию <code>OnUnload</code>, если она определена. С её помощью вы должны вернуть игру в исходное состояние (например, удалить парты или восстановить параметры).</p>
             <div class="code-window ide">
                 <div class="ide-header">cleanup_logic.lua</div>
                 <pre><code>-- Сохраняем оригинальные параметры
