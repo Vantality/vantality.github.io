@@ -134,16 +134,27 @@ body {
 }
 
 .ide-header {
-    background: var(--stroke); 
-    padding: 8px 15px;
-    font-size: 11px; 
+    background: var(--stroke);
+    padding: 5px 15px; 
+    font-size: 11px; color: var(--text-dark);
     color: var(--text-dark); 
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'JetBrains Mono';
     display: flex; 
     justify-content: space-between; 
     align-items: center;
     border-bottom: 1px solid var(--stroke);
 }
+
+.copy-btn {
+    background: transparent; border: none; color: var(--text-dark);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    cursor: pointer; display: flex; align-items: center; gap: 5px;
+    transition: 0.2s ease; outline: none;
+}
+
+.copy-btn:hover { color: var(--text); }
+.copy-btn i { width: 14px; height: 14px; }
+.copy-btn.success { color: #64ff64; }
 
 .ide-title {
     opacity: 0.8;
@@ -188,6 +199,7 @@ pre code {
 }
 
 /* Syntax Highlighting */
+.hl-global { color: #4ec9b0; }
 .hl-keyword { color: #ff6a85; }
 .hl-string { color: #ce9178; }
 .hl-comment { color: #6a9955; font-style: italic; }
