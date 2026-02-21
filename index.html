@@ -362,7 +362,7 @@ end</code></pre>
         <section id="full-example" class="content-block">
             <div class="block-title">
                 <i data-lucide="file-check"></i>
-                <h2>Итоговый пример (Complete Script)</h2>
+                <h2>COMPLETE SCRIPT</h2>
             </div>
             <p class="section-desc">Пример всех основных возможностей API в одном файле.</p>
             <div class="code-window ide large">
@@ -399,7 +399,7 @@ local OverlayToggle = UI:AddToggle({
 	end
 })
 
--- закидываем доп. настройки ВО ВНУТРЬ тоггла (в шестеренку).
+-- закидываем доп. настройки ВНУТРЬ тоггла (в шестеренку).
 -- ВАЖНО: всегда чекайте наличие .Option перед добавлением
 if OverlayToggle.Option then
 	OverlayToggle.Option:AddButton({
@@ -497,12 +497,12 @@ Vantality.Bind(game:GetService("RunService").RenderStepped, function(dt)
 		local rgb = arrowData.Color
 		local alpha = arrowData.Transparency
 
-		-- тут ваша математика под TSB (например, апдейт стрелочек на врагов)
+		-- тут ваша математика под тсб (например, апдейт стрелочек на врагов)
 	end
 end)
 
 -- 10. ВЫГРУЗКА (CLEANUP)
--- Vantality сама отрубит коннекты (Bind) и снесет UI.
+-- API само отрубит коннекты (Bind) и удалит секцию.
 -- НО если вы спавните партиклы, локалпарты (Instance.new) или юзаете Drawing API:
 -- ВЫ ОБЯЗАНЫ УДАЛИТЬ ИХ ТУТ САМИ.
 
@@ -510,14 +510,14 @@ end)
 local IndicatorText = Drawing.new("Text")
 
 function OnUnload()
-	print(">> script unloaded via Vantality API.")
+	print(">> script unloaded via API.")
 
 	-- чистим за собой мусор
 	if IndicatorText then
 		IndicatorText:Remove()
 	end
 
-	-- бекапаем стейты игры в исходную
+	-- возвращаем стейты игры в исходную
 	-- game.Lighting.FogEnd = 100000
 end
 </code></pre>
