@@ -395,7 +395,6 @@ local UI = Vantality.CreateSection("Luau API example")
 UI:AddParagraph({
 	Title = "Welcome to Vantality Luau API", -- жирный заголовок параграфа
 	Content = "показывает весь функционал API. юзайте GetValue() и SetValue(), чтобы не плодить миллион локальных переменных." -- основной текст в параграфе (описание)
-	
 })
 
 -- 3. текстовое поле (input)
@@ -424,6 +423,7 @@ local OverlayToggle = UI:AddToggle({
 if OverlayToggle.Option then
 	OverlayToggle.Option:AddButton({
 		Name = "Force Disable",
+		Risky = true, -- кнопки внутри шестеренки тоже поддерживают Risky
 		Callback = function()
 			-- меняем значение ползунка/тоггла напрямую через метод.
 			-- второй аргумент (true) принудительно триггерит Callback самого тоггла
@@ -439,6 +439,8 @@ local FovSlider = UI:AddSlider({
 	Name = "Camera FOV",
 	Range = {70, 120}, -- задаём лимит: {минимум, максимум}
 	Default = 90, -- дефолтное значение ползунка
+	Option = false, -- может быть использовано тут
+	Risky = false, -- может быть использовано тут
 	Step = 1, -- шаг (int). если 10, то слайдер будет меняться так: 0, 10, 20, 30...
 	Type = "°", -- суффикс, добавляется к цифре визуально (например: 90°)
 	Callback = function(val) -- возвращает число
@@ -449,6 +451,8 @@ local StretchSlider = UI:AddSlider({
 	Name = "Screen Stretch",
 	Range = {0, 1},
 	Default = 0.5,
+	Option = false, 
+	Risky = false, 
 	Precise = 2, -- сколько знаков после запятой (0.50). (используется вместо Step для float-значений)
 	Callback = function(val)
 	end
@@ -460,7 +464,8 @@ local SkyboxDropdown = UI:AddDropdown({
 	Name = "Custom Sky",
 	Values = {"Night", "Vaporwave", "Blood Moon"}, -- Список доступных вариантов (массив строк)
 	Default = "Night", -- вариант, выбранный по умолчанию (должен быть из списка Values)
-	Multi = false, -- если false = можно выбрать только один пункт
+	Option = false, -- может быть использовано тут
+	Multi = false, -- если false - можно выбрать только один пункт
 	Callback = function(val) -- возвращает строку ("Night")
 	end
 })
@@ -470,6 +475,7 @@ UI:AddDropdown({
 	Name = "Render Filters",
 	Values = {"Players", "Corpses", "Map Details"}, 
 	Default = { ["Players"] = true, ["Corpses"] = false }, -- для Multi: указываем таблицу состояния пунктов
+	Option = false, -- может быть использовано тут
 	Multi = true, -- если true = можно включить несколько пунктов одновременно
 	Callback = function(tbl) -- возвращает таблицу состояний: { Players = true, Corpses = false ... }
 	end
@@ -479,6 +485,7 @@ UI:AddDropdown({
 local ArrowColor = UI:AddColorPicker({
 	Name = "Player Arrows Color",
 	Default = Color3.fromRGB(255, 106, 133), -- дефолтный цвет
+	Option = false, -- может быть использовано тут
 	Transparency = 0.5, -- дефолтная прозрачность (альфа-канал от 0 до 1)
 	Callback = function(color, alpha) -- возвращает (Color3, number)
 	end
@@ -487,6 +494,7 @@ local ArrowColor = UI:AddColorPicker({
 local CameraStrafeKey = UI:AddKeybind({
 	Name = "Camera Strafe Key",
 	Default = Enum.KeyCode.C, -- кнопка по умолчанию (можно юзать строки, например "C")
+	Option = false, -- может быть использовано тут
 	Callback = function(key) -- возвращает название нажатой клавиши
 	end
 })
@@ -494,6 +502,7 @@ local CameraStrafeKey = UI:AddKeybind({
 -- 8. кнопки и система уведомлений
 UI:AddButton({
 	Name = "Apply Visuals", -- текст на кнопке
+	Risky = false, -- может быть использовано тут
 	Callback = function() -- срабатывает при каждом клике по кнопку
 		Vantality.Notify({
 			Title = "Visuals Loaded", -- заголовок уведомления
@@ -537,7 +546,6 @@ function OnUnload()
 	if IndicatorText then
 		IndicatorText:Remove()
 	end
-
 	-- возвращаем стейты игры в исходную
 	-- game.Lighting.FogEnd = 100000
 end
