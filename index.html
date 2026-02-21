@@ -465,8 +465,8 @@ local SkyboxDropdown = UI:AddDropdown({
 -- мульти-выбор (возвращает таблицу {Players = true, Corpses = false})
 UI:AddDropdown({
 	Name = "Render Filters",
-	Values = {"Players", "Corpses", "Map Details"},
-	Default = { = true, = false},
+	Values = {"Players", "Corpses"},
+	Default = { ["Players"] = true, ["Corpses"] = false },
 	Multi = true,
 	Callback = function(val)
 	end
