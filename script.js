@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Инициализация иконок
     lucide.createIcons();
 
-    // Подсветка синтаксиса
     const highlightCode = () => {
         const codeBlocks = document.querySelectorAll('pre code');
         
