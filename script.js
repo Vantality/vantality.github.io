@@ -1,25 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. Инициализация иконок Lucide
     lucide.createIcons();
 
+    // 2. Новая, надежная подсветка синтаксиса
     const highlightCode = () => {
         const codeBlocks = document.querySelectorAll('pre code');
         
-        const keywords = /\b(local|function|if|then|else|elseif|end|return|for|in|pairs|ipairs|while|do|and|or|not|true|false|nil)\b/g;
-        const strings = /(['"])(?:(?=(\\?))\2.)*?\1/g;
-        const comments = /(--.*)/g;
-        const functions = /\b([a-zA-Z_][a-zA-Z0-9_]*)(?=\s*\()/g;
-        const numbers = /\b(\d+)\b/g;
-        const globals = /\b(game|workspace|Color3|Vector3|Enum|CFrame|Instance|math|task|string|table|RBXScriptSignal|RBXScriptConnection|Drawing)\b/g;
+        // Одна мощная регулярка, которая ищет совпадения по группам.
+        // Строго соблюдает приоритет (сначала комментарии, потом строки, функции и т.д.)
+        const syntax = /(--.*)|((["'])(?:\\.|[^\\])*?\3)|\b([a-zA-Z_][a-zA-Z0-9_]*)(?=\s*\()|\b(local|function|if|then|else|elseif|end|return|for|in|pairs|ipairs|while|do|and|or|not|true|false|nil)\b|\b(game|workspace|Color3|Vector3|Enum|CFrame|Instance|math|task|string|table|RBXScriptSignal|RBXScriptConnection|Drawing)\b|\b(\d+)\b/g;
 
         codeBlocks.forEach(block => {
-            let html = block.innerHTML;
+            // Берем чистый текст, чтобы случайно не сломать HTML разметку
+            let text = block.textContent;
+            
+            // Экранируем HTML символы (<, >), чтобы они не воспринимались как реальные теги
+            text = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-            html = html.replace(comments, '<span class="hl-comment">$1</span>');
-            html = html.replace(strings, '<span class="hl-string">$1</span>');
-            html = html.replace(keywords, '<span class="hl-keyword">$1</span>');
-            html = html.replace(globals, '<span class="hl-global">$1</span>');
-            html = html.replace(numbers, '<span class="hl-val">$1</span>');
-            html = html.replace(functions, '<span class="hl-func">$1</span>');
+            // Заменяем всё за один проход
+            let html = text.replace(syntax, (match, comment, str, quote, func, keyword, global, number) => {
+                if (comment) return `<span class="hl-comment">${comment}</span>`;
+                if (str)     return `<span class="hl-string">${str}</span>`; // Теперь строки не пропадают!
+                if (func)    return `<span class="hl-func">${func}</span>`;
+                if (keyword) return `<span class="hl-keyword">${keyword}</span>`;
+                if (global)  return `<span class="hl-global">${global}</span>`;
+                if (number)  return `<span class="hl-val">${number}</span>`;
+                return match;
+            });
 
             block.innerHTML = html;
         });
@@ -27,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     highlightCode();
 
-    // Анимация при скролле
+    // 3. Анимация появления элементов при скролле
     const observerOptions = {
         threshold: 0.1,
         rootMargin: "0px 0px -50px 0px"
@@ -55,20 +62,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Логика кнопки "Copy"
+    // 4. Логика кнопки "Copy"
     const copyBtn = document.getElementById('copy-example-btn');
     if (copyBtn) {
         copyBtn.addEventListener('click', () => {
+            // Ищем тег pre в блоке full-example (textContent берет чистый текст без span тегов)
             const codeBlock = document.querySelector('#full-example pre');
             
             if (codeBlock) {
                 navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                    // Визуальный фидбек успеха
                     const originalHTML = '<i data-lucide="copy"></i> Copy';
                     copyBtn.innerHTML = '<i data-lucide="check"></i> Copied!';
                     copyBtn.classList.add('success');
                     
+                    // Обновляем иконки Lucide, так как мы изменили DOM
                     lucide.createIcons();
 
+                    // Возвращаем как было через 2 секунды
                     setTimeout(() => {
                         copyBtn.innerHTML = originalHTML;
                         copyBtn.classList.remove('success');
