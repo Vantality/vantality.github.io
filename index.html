@@ -27,7 +27,7 @@
     <section class="hero-section">
         <div class="hero-content">
             <h1 class="glow-text">NEXT GEN: in exploit LuaU</h1>
-            <p>Подробная документация по созданию скриптов для Vantality<br> а так же их публикации на MARKETPLACE.<br></p>
+            <p>Подробная документация по созданию скриптов для Vantality<br>А так же их публикации на marketplace<br></p>
         </div>
     </section>
 
@@ -113,7 +113,7 @@
 <!-- UI ELEMENTS DETAILED -->
         <div class="api-sub-section">
             <h3>Создание элементов (UI Methods)</h3>
-            <p class="text-dim"><strong>Важно:</strong> Все созданные вами секции и элементы будут автоматически распределены по колонкам внутри вкладки <strong>LUAU</strong> в главном меню Vantality. <br>Во многих методах используется параметр <code>Flag</code> — он задает уникальный ключ, по которому API будет автоматически сохранять и загружать настройки вашего скрипта в папку <code>configs</code>.</p>
+            <p class="text-dim"><strong>Важно:</strong> Все созданные вами секции и элементы будут автоматически распределены по колонкам внутри вкладки <strong>LUAU</strong>.</p>
             
             <div class="element-table">
                 <!-- Paragraph -->
@@ -125,7 +125,7 @@
                     <div class="el-code">
                         <pre><code>UI:AddParagraph({ 
     Title = "Information", 
-    Content = "Этот скрипт находится в стадии беты." 
+    Content = "Скрипт разрабатывается.." 
 })</code></pre>
                     </div>
                 </div>
@@ -141,7 +141,6 @@
     Name = "Target Player", 
     PlaceholderText = "Введите ник...", 
     Default = "", 
-    Flag = "Target_Input",
     Callback = function(text) end 
 })</code></pre>
                     </div>
@@ -159,7 +158,6 @@
     Default = false, 
     Risky = true,
     Option = true,
-    Flag = "GodMode_Toggle",
     Callback = function(state) end 
 })</code></pre>
                     </div>
@@ -178,7 +176,6 @@
     Default = 16, 
     Step = 1,
     Type = " studs",
-    Flag = "WS_Slider",
     Callback = function(v) end 
 })</code></pre>
                     </div>
@@ -196,7 +193,6 @@
     Range = {0, 1}, 
     Default = 0.5, 
     Precise = 2,
-    Flag = "JH_Slider",
     Callback = function(v) end 
 })</code></pre>
                     </div>
@@ -213,7 +209,6 @@
     Name = "Target Bone", 
     Values = {"Head", "Torso", "Random"}, 
     Default = "Head",
-    Flag = "Bone_Drop",
     Callback = function(v) end 
 })</code></pre>
                     </div>
@@ -231,7 +226,6 @@
     Values = {"Players", "NPCs"}, 
     Default = { = true, = false},
     Multi = true,
-    Flag = "Filter_Drop",
     Callback = function(tbl) end 
 })</code></pre>
                     </div>
@@ -248,7 +242,6 @@
     Name = "ESP Color", 
     Default = Color3.fromRGB(255, 0, 0),
     Transparency = 0.5,
-    Flag = "ESP_Color",
     Callback = function(color, alpha) end 
 })</code></pre>
                     </div>
@@ -264,7 +257,6 @@
                         <pre><code>UI:AddKeybind({ 
     Name = "Flight Key", 
     Default = Enum.KeyCode.F,
-    Flag = "Flight_Key",
     Callback = function(key) end 
 })</code></pre>
                     </div>
@@ -274,7 +266,7 @@
                 <div class="el-row">
                     <div class="el-info">
                         <h4>AddButton</h4>
-                        <p>Простое действие без сохранения состояния (Flag не требуется).</p>
+                        <p>Простое действие при нажатии.</p>
                     </div>
                     <div class="el-code">
                         <pre><code>UI:AddButton({ 
