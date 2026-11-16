@@ -71,7 +71,7 @@ body {
 .hero-content p { color: var(--text-dark); font-size: 18px; max-width: 600px; margin: 0 auto; }
 
 /* Main Content Layout */
-.main-content { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+.main-content { max-width: 1000px; margin: 0 auto; padding: 110px 20px 40px; }
 
 .content-block { margin-bottom: 100px; }
 
